@@ -1,7 +1,9 @@
 <?php
 
 namespace controllers;
-class AboutController
+use core\Controller;
+
+class AboutController extends Controller
 {
     public function indexAction(){
         echo 'AboutController: constructor';

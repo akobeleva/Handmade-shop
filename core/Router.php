@@ -70,7 +70,7 @@ class Router
      * */
     public static function dispatch(string $url){
         if (self::matchRoute($url)) {
-            $controller = self::upperCamelCase(self::$route['controller']).'Controller';
+            $controller = 'controllers\\'.self::upperCamelCase(self::$route['controller']).'Controller';
             if (class_exists($controller)) {
                 $constructorObj = new $controller();
                 $action = self::lowerCamelCase(self::$route['action']) . 'Action';

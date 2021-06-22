@@ -71,12 +71,13 @@ class Router
      * */
     public static function dispatch(string $url){
         if (self::matchRoute($url)) {
-            $controller = 'controllers\\'.self::$route['controller'].'Controller';
+            $controller = 'app\\controllers\\'.self::$route['controller'].'Controller';
             if (class_exists($controller)) {
-                $constructorObj = new $controller(self::$route);
+                $controllerObj = new $controller(self::$route);
                 $action = self::lowerCamelCase(self::$route['action']) . 'Action';
-                if (method_exists($constructorObj, $action)) {
-                    $constructorObj->$action();
+                if (method_exists($controllerObj, $action)) {
+                    $controllerObj->$action();
+                    $controllerObj->getView();
                 } else {
                     echo "Метод <b> $controller::$action </b> не найден";
                 }

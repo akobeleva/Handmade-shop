@@ -21,7 +21,8 @@ class Router
      * @param string $regexp регулярное выражение маршрута
      * @param array $route маршрут (controller, action, [params])
      * */
-    public static function add(string $regexp, array $route = []){
+    public static function add(string $regexp, array $route = [])
+    {
         self::$routes[$regexp] = $route;
     }
 
@@ -29,7 +30,8 @@ class Router
      * возвращает таблицу маршрутов
      * @return array
      * */
-    public static function getRoutes(): array{
+    public static function getRoutes(): array
+    {
         return self::$routes;
     }
 
@@ -37,7 +39,8 @@ class Router
      * возвращает текущий маршрут (controller, action, [params])
      * @return array
      * */
-    public static function getRoute(): array{
+    public static function getRoute(): array
+    {
         return self::$route;
     }
 
@@ -46,7 +49,8 @@ class Router
      * @param string $url входящий URL
      * @return boolean
      * */
-    public static function matchRoute(string $url): bool{
+    public static function matchRoute(string $url): bool
+    {
         foreach (self::$routes as $pattern => $route)
             if (preg_match("#$pattern#i", $url, $matches)) {
                 foreach ($matches as $k => $v) {
@@ -69,9 +73,10 @@ class Router
      * @param string $url входящий URL
      * @return void
      * */
-    public static function dispatch(string $url){
+    public static function dispatch(string $url)
+    {
         if (self::matchRoute($url)) {
-            $controller = 'app\\controllers\\'.self::$route['controller'].'Controller';
+            $controller = 'app\\controllers\\' . self::$route['controller'] . 'Controller';
             if (class_exists($controller)) {
                 $controllerObj = new $controller(self::$route);
                 $action = self::lowerCamelCase(self::$route['action']) . 'Action';
@@ -110,7 +115,8 @@ class Router
         return lcfirst(self::upperCamelCase($name));
     }
 
-    public function run(){
+    public function run()
+    {
         echo 'start router';
     }
 

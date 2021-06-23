@@ -1,0 +1,46 @@
+body {
+    font-family: "Verdana";
+    font-size: 16px;
+    max-width: 85%;
+}
+
+header {
+    margin: 0.625em auto;
+    max-width: 85%;
+    display: -webkit-flex;
+    display: -ms-flex;
+    display: flex;
+    -ms-align-items: center;
+    align-items: center;
+    border-bottom: 0.0625em solid #1c1f23;
+    justify-content: space-between;
+}
+
+header .buttons {
+    display: -webkit-flex;
+    -ms-align-items: center;
+    align-items: center;
+}
+
+header .buttons a {
+    margin-right: 1em;
+}
+
+header .logo img {
+    max-width: 20%;
+}
+
+header .btn_bag img {
+    width: 3em;
+    height: 3em;
+}
+
+header .btn_user img {
+    width: 3em;
+    height: 3em;
+}
+
+header .btn_signin {
+    text-decoration: none;
+    color: #2e3439;
+}

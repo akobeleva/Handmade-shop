@@ -8,5 +8,6 @@ class ContactsController extends Controller
 {
     public function indexAction()
     {
+        $this->view->render('default.php', 'ContactsView.php');
     }
 }

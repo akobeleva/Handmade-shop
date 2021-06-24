@@ -4,19 +4,14 @@ namespace core;
 
 abstract class Controller
 {
-    public $route = [];
     public $view;
-    public $layout;
 
-    public function __construct($route)
+    public function __construct()
     {
-        $this->route = $route;
-        $this->view = $route['controller'];
+        $this->view = new View();
     }
 
-    public function getView()
+    public function indexAction()
     {
-        $viewObject = new View($this->route, $this->layout, $this->view);
-        $viewObject->render();
     }
 }

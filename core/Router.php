@@ -2,100 +2,54 @@
 
 namespace core;
 
+use app\controllers\AboutController;
+use app\controllers\ContactsController;
+use app\controllers\MainController;
+
+
 class Router
 {
     protected static $routes = [];
     protected static $currentRoute = [];
 
-    public static function addRoute(string $route, array $handler = [])
+    public function __construct()
     {
-        self::$routes[$route] = $handler;
+        $this->addRoute('', MainController::class);
+        $this->addRoute('/about', AboutController::class);
+        $this->addRoute('/contacts', ContactsController::class);
     }
 
-    public static function getRoutes(): array
+    public static function addRoute(string $url, string $controller)
     {
-        return self::$routes;
+        self::$routes[$url] = $controller;
     }
 
-    public static function getCurrentRoute(): array
+    public static function matchRoute(string $incomingURL): bool
     {
-        return self::$currentRoute;
-    }
-
-    /**
-     * find URL in route's table
-     * @param string $url incoming URL
-     * @return bool
-     * */
-    public static function matchRoute(string $url): bool
-    {
-        foreach (self::$routes as $pattern => $route)
-            if (preg_match("#$pattern#i", $url, $matches)) {
-                foreach ($matches as $k => $v) {
-                    if (is_string(($k))) {
-                        $route[$k] = $v;
-                    }
-                }
-                if (!isset($route['action'])) {
-                    $route['action'] = 'index';
-                }
-                $route['controller'] = self::upperCamelCase($route['controller']);
-                self::$currentRoute = $route;
+        foreach (self::$routes as $url => $controller) {
+            if ($url == $incomingURL) {
+                self::$currentRoute['url'] = $url;
+                self::$currentRoute['controller'] = $controller;
                 return true;
             }
+        }
         return false;
     }
 
     /**
      * redirect URL to the correct route
-     * @param string $url incoming URL
      * @return void
      * */
-    public static function dispatch(string $url)
+    public static function dispatch()
     {
+        $url = rtrim($_SERVER['REQUEST_URI'], '/');
         if (self::matchRoute($url)) {
-            $controller = 'app\\controllers\\' . self::$currentRoute['controller'] . 'Controller';
-            if (class_exists($controller)) {
-                $controllerObj = new $controller(self::$currentRoute);
-                $action = self::lowerCamelCase(self::$currentRoute['action']) . 'Action';
-                if (method_exists($controllerObj, $action)) {
-                    $controllerObj->$action();
-                    $controllerObj->getView();
-                } else {
-                    echo "Method <b> $controller::$action </b> not found";
-                }
-            } else {
-                echo "Controller <b> $controller </b> not found";
-            }
+            $controllerName = self::$currentRoute['controller'];
+            $controller = new $controllerName();
+            $controller->indexAction();
         } else {
             http_response_code(404);
-            include 'public/404.html';
+            include '../public/404.html';
         }
     }
-
-    /**
-     * приводит к корректному названию класса
-     * @param string $name входяще имя класса
-     * @return string
-     **/
-    protected static function upperCamelCase(string $name): string
-    {
-        return str_replace(' ', '', ucwords(str_replace('-', ' ', $name)));
-    }
-
-    /**
-     * приводит к корректному названию метода
-     * @param string $name входяще имя метода
-     * @return string
-     **/
-    protected static function lowerCamelCase(string $name): string
-    {
-        return lcfirst(self::upperCamelCase($name));
-    }
-
-    public function run()
-    {
-        echo 'start router';
-    }
-
 }

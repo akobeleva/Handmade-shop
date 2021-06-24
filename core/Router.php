@@ -4,50 +4,28 @@ namespace core;
 
 class Router
 {
-    /**
-     * таблица маршрутов
-     * @var array
-     * */
     protected static $routes = [];
+    protected static $currentRoute = [];
 
-    /**
-     * текцщий маршрут
-     * @var array
-     * */
-    protected static $route = [];
-
-    /**
-     * добавляет маршрут в таблицу маршрутов
-     * @param string $regexp регулярное выражение маршрута
-     * @param array $route маршрут (controller, action, [params])
-     * */
-    public static function add(string $regexp, array $route = [])
+    public static function addRoute(string $route, array $handler = [])
     {
-        self::$routes[$regexp] = $route;
+        self::$routes[$route] = $handler;
     }
 
-    /**
-     * возвращает таблицу маршрутов
-     * @return array
-     * */
     public static function getRoutes(): array
     {
         return self::$routes;
     }
 
-    /**
-     * возвращает текущий маршрут (controller, action, [params])
-     * @return array
-     * */
-    public static function getRoute(): array
+    public static function getCurrentRoute(): array
     {
-        return self::$route;
+        return self::$currentRoute;
     }
 
     /**
-     * ищет URL в таблице маршрутов
-     * @param string $url входящий URL
-     * @return boolean
+     * find URL in route's table
+     * @param string $url incoming URL
+     * @return bool
      * */
     public static function matchRoute(string $url): bool
     {
@@ -62,32 +40,32 @@ class Router
                     $route['action'] = 'index';
                 }
                 $route['controller'] = self::upperCamelCase($route['controller']);
-                self::$route = $route;
+                self::$currentRoute = $route;
                 return true;
             }
         return false;
     }
 
     /**
-     * перенаправляет URL по корректному маршруту
-     * @param string $url входящий URL
+     * redirect URL to the correct route
+     * @param string $url incoming URL
      * @return void
      * */
     public static function dispatch(string $url)
     {
         if (self::matchRoute($url)) {
-            $controller = 'app\\controllers\\' . self::$route['controller'] . 'Controller';
+            $controller = 'app\\controllers\\' . self::$currentRoute['controller'] . 'Controller';
             if (class_exists($controller)) {
-                $controllerObj = new $controller(self::$route);
-                $action = self::lowerCamelCase(self::$route['action']) . 'Action';
+                $controllerObj = new $controller(self::$currentRoute);
+                $action = self::lowerCamelCase(self::$currentRoute['action']) . 'Action';
                 if (method_exists($controllerObj, $action)) {
                     $controllerObj->$action();
                     $controllerObj->getView();
                 } else {
-                    echo "Метод <b> $controller::$action </b> не найден";
+                    echo "Method <b> $controller::$action </b> not found";
                 }
             } else {
-                echo "Контролллер <b> $controller </b> не найден";
+                echo "Controller <b> $controller </b> not found";
             }
         } else {
             http_response_code(404);

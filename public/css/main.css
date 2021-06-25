@@ -60,3 +60,7 @@ footer .buttons_info a:hover {
 .content {
     flex-grow: 1;
 }
+
+.content .table_contacts img{
+    max-width: 5%;
+}

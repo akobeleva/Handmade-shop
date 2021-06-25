@@ -25,7 +25,7 @@
         <a href="/about" class="btn_about">О нас</a>
         <a href="/contacts" class="btn_contacts">Контакты</a>
     </div>
-    2021
+    ©2021
 </footer>
 </body>
 </html>

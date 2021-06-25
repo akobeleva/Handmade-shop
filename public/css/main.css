@@ -1,5 +1,5 @@
 body {
-    font-family: "Verdana";
+    font-family: "Verdana", serif;
     font-size: 16px;
     max-width: 85%;
     margin: 0.625em auto;
@@ -16,6 +16,7 @@ header {
 }
 
 footer {
+    padding: 0.625em;
     height: 3em;
     display: flex;
     border-top: 0.0625em solid #1c1f23;

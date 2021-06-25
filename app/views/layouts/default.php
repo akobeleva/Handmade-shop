@@ -12,11 +12,21 @@
 <header>
     <a href="/" class="logo"><img src="/img/logo.jpg" alt=""></a>
     <div class="buttons">
-        <a href="/" class="btn_bag"><img src="/img/shopping-bag.png" alt=""></a>
-        <a href="/" class="btn_user"><img src="/img/avatar.png" alt=""></a>
-        <a href="/" class="btn_signin">Sign In</a>
+        <a href="/"><img src="/img/shopping-bag.png" alt=""></a>
+        <a href="/""><img src="/img/avatar.png" alt=""></a>
+        <a href="/">Sign In</a>
     </div>
 </header>
-<?= $content ?>
+<div class="content">
+    <?= $content ?>
+</div>
+<footer>
+    Авторские изделия ручной работы
+    <div class="buttons_info">
+        <a href="/about" class="btn_about">О нас</a>
+        <a href="/contacts" class="btn_contacts">Контакты</a>
+    </div>
+    2021
+</footer>
 </body>
 </html>

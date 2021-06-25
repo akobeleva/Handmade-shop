@@ -1,45 +1,53 @@
 body {
     font-family: "Verdana";
     font-size: 16px;
+    max-width: 85%;
+    margin: 0.625em auto;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 header {
-    margin: 0.625em auto;
-    max-width: 85%;
-    display: -webkit-flex;
-    display: -ms-flex;
     display: flex;
-    -ms-align-items: center;
-    align-items: center;
     border-bottom: 0.0625em solid #1c1f23;
+    justify-content: space-between;
+    position: relative;
+}
+
+footer {
+    height: 3em;
+    display: flex;
+    border-top: 0.0625em solid #1c1f23;
     justify-content: space-between;
 }
 
 header .buttons {
     display: -webkit-flex;
-    -ms-align-items: center;
     align-items: center;
 }
 
 header .buttons a {
     margin-right: 1em;
+    text-decoration: none;
+    color: #2e3439;
 }
 
 header .logo img {
     max-width: 20%;
 }
 
-header .btn_bag img {
+header .buttons img {
     width: 3em;
     height: 3em;
 }
 
-header .btn_user img {
-    width: 3em;
-    height: 3em;
-}
-
-header .btn_signin {
+footer .buttons_info a {
+    margin-right: 1em;
     text-decoration: none;
     color: #2e3439;
+}
+
+.content {
+    flex-grow: 1;
 }

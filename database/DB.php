@@ -11,8 +11,11 @@ class DB
 
     protected function __construct()
     {
-        $db = require_once 'config/database.php';
-        $this->pdo = new PDO($db['dsn'], $db['user'], $db['pass']);
+        $db = require_once '../config/database.php';
+        $options = [
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+        ];
+        $this->pdo = new PDO($db['dsn'], $db['user'], $db['pass'], $options);
     }
 
     public static function getInstance(): DB

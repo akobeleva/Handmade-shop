@@ -1,3 +1,8 @@
+<?php
+
+use database\DB;
+
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -16,6 +21,17 @@
         <a href="/">Sign In</a>
     </div>
 </header>
+<ul class="menu">
+    <li><a href="/catalog">Каталог</a> </li>
+    <?php
+    $db = DB::getInstance();
+    $menu = $db->query("SELECT * FROM category");
+    foreach ($menu as $item): ?>
+        <li><a href="/"><?php
+                echo $item['category_name'] ?></a></li>
+    <?php
+    endforeach; ?>
+</ul>
 <div class="content">
     <?= $content ?>
 </div>

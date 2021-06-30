@@ -54,7 +54,7 @@ footer .buttons_info a {
 }
 
 footer .buttons_info a:hover {
-    color: #595c5f;
+    color: #535658;
 }
 
 .content {
@@ -63,4 +63,26 @@ footer .buttons_info a:hover {
 
 .content .table_contacts img{
     max-width: 5%;
+}
+
+.menu {
+    list-style-type: none;
+    border-bottom: 0.0625em solid #1c1f23;
+    display: flex;
+    padding-bottom: 0.625em;
+}
+ .menu li {
+     flex-basis: auto;
+     flex-grow: 1;
+     display: inline-block;
+ }
+
+ .menu li a {
+     display: block;
+     text-decoration: none;
+     color: #1c1f23;
+ }
+
+.menu li a:hover {
+    color: #535658;
 }

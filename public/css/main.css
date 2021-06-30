@@ -62,7 +62,11 @@ footer .buttons_info a:hover {
 }
 
 .content .table_contacts img{
-    max-width: 5%;
+    max-width: 70%;
+}
+
+.content .table_contacts td {
+    width: 2em;
 }
 
 .menu {

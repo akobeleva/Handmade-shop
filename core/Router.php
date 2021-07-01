@@ -3,6 +3,7 @@
 namespace core;
 
 use app\controllers\AboutController;
+use app\controllers\CatalogController;
 use app\controllers\ContactsController;
 use app\controllers\MainController;
 
@@ -17,6 +18,7 @@ class Router
         $this->addRoute('', MainController::class);
         $this->addRoute('/about', AboutController::class);
         $this->addRoute('/contacts', ContactsController::class);
+        $this->addRoute('/catalog', CatalogController::class);
     }
 
     public static function addRoute(string $url, string $controller)
@@ -38,6 +40,7 @@ class Router
 
     /**
      * redirect URL to the correct route
+     *
      * @return void
      * */
     public static function dispatch()

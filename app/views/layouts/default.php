@@ -25,10 +25,10 @@ use database\DB;
     <li><a href="/catalog">Каталог</a> </li>
     <?php
     $db = DB::getInstance();
-    $menu = $db->query("SELECT * FROM category");
+    $menu = $db->query("SELECT * FROM category ORDER BY category_id");
     foreach ($menu as $item): ?>
         <li><a href="/"><?php
-                echo $item['category_name'] ?></a></li>
+                echo $item['name'] ?></a></li>
     <?php
     endforeach; ?>
 </ul>

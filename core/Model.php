@@ -1,6 +1,5 @@
 <?php
 
-
 namespace core;
 
 use database\DB;
@@ -10,19 +9,15 @@ abstract class Model
     protected $db;
     protected $table;
 
-    public function __construct()
+    public function __construct(string $tableName = null)
     {
         $this->db = DB::getInstance();
+        $this->table = $tableName;
     }
 
-    public function query($sql): bool
+    public function getAllRows(): array
     {
-        return $this->db->execute($sql);
-    }
-
-    public function findAll(): array
-    {
-        $sql = "SELECT * FROM {$this->table}";
-        return $this->db->query($sql);
+        $sql = "SELECT * FROM $this->table";
+        return $this->db->executeQuery($sql);
     }
 }

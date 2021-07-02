@@ -6,10 +6,10 @@ use PDO;
 
 class DB
 {
-    protected $pdo;
-    protected static $instance;
+    private $pdo;
+    private static $instance;
 
-    protected function __construct()
+    private function __construct()
     {
         $db = require_once '../config/database.php';
         $options = [
@@ -26,13 +26,13 @@ class DB
         return self::$instance;
     }
 
-    public function execute(string $sql): bool
+    public function executeUpdate(string $sql): bool
     {
         $statement = $this->pdo->prepare($sql);
         return $statement->execute();
     }
 
-    public function query($sql): array
+    public function executeQuery($sql): array
     {
         $statement = $this->pdo->prepare($sql);
         $result = $statement->execute();

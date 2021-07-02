@@ -4,13 +4,8 @@ namespace core;
 
 class View
 {
-    public $layout;
-
-    public function renderPage(string $layoutName, string $viewName, $data = null)
+    public function renderPage(string $layoutName, string $viewName)
     {
-        if (is_array($data)) {
-            extract($data);
-        }
         $file_view = '../app/views/' . $viewName;
         ob_start();
         require_once $file_view;
@@ -20,8 +15,11 @@ class View
         require_once $file_layout;
     }
 
-    public function renderComponent(string $componentViewName)
+    public function renderComponent(string $componentViewName, $data = null)
     {
+        if (is_array($data)) {
+            extract($data);
+        }
         require_once '../app/views/' . $componentViewName;
     }
 }

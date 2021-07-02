@@ -14,6 +14,6 @@ class CatalogController extends Controller
 
     public function indexAction()
     {
-        $this->view->render('default.php', 'CatalogView.php');
+        $this->view->renderPage('default.php', 'CatalogView.php');
     }
 }

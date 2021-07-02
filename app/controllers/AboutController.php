@@ -14,6 +14,6 @@ class AboutController extends Controller
 
     public function indexAction()
     {
-        $this->view->render('default.php', 'AboutView.php');
+        $this->view->renderPage('default.php', 'AboutView.php');
     }
 }

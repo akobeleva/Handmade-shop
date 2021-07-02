@@ -1,6 +1,6 @@
 <?php
 
-use database\DB;
+use app\controllers\MenuController;
 
 ?>
 <!doctype html>
@@ -15,23 +15,18 @@ use database\DB;
 <body>
 <header>
     <a href="/" class="logo"><img src="/img/logo.jpg" alt=""></a>
+
     <div class="buttons">
         <a href="/"><img src="/img/shopping-bag.png" alt=""></a>
         <a href="/""><img src="/img/avatar.png" alt=""></a>
         <a href="/">Sign In</a>
     </div>
+
 </header>
-<ul class="menu">
-    <li><a href="/catalog">Каталог</a> </li>
     <?php
-    $db = DB::getInstance();
-    $menu = $db->query("SELECT * FROM category ORDER BY category_id");
-    foreach ($menu as $item): ?>
-        <li><a href="/"><?php
-                echo $item['name'] ?></a></li>
-    <?php
-    endforeach; ?>
-</ul>
+    $menuController = new MenuController();
+    $menuController->indexAction();
+    ?>
 <div class="content">
     <?= $content ?>
 </div>

@@ -14,29 +14,32 @@ use app\controllers\MenuController;
 </head>
 <body>
 <header>
-    <a href="/" class="logo"><img src="/img/logo.jpg" alt=""></a>
+    <div class="subheader">
+        <a href="/" class="logo"><img src="/img/logo.jpg" alt=""></a>
 
-    <div class="buttons">
-        <a href="/"><img src="/img/shopping-bag.png" alt=""></a>
-        <a href="/""><img src="/img/avatar.png" alt=""></a>
-        <a href="/">Sign In</a>
+        <div class="buttons">
+            <a href="/"><img src="/img/shopping-bag.png" alt=""></a>
+            <a href="/""><img src="/img/avatar.png" alt=""></a>
+            <a href="/">Sign In</a>
+        </div>
     </div>
-
+    <nav class="menu">
+        <?php
+        $menuController = new MenuController();
+        $menuController->indexAction();
+        ?>
+    </nav>
 </header>
-    <?php
-    $menuController = new MenuController();
-    $menuController->indexAction();
-    ?>
 <div class="content">
     <?= $content ?>
 </div>
 <footer>
-    Авторские изделия ручной работы
+    <span>Авторские изделия ручной работы</span>
     <div class="buttons_info">
         <a href="/about" class="btn_about">О нас</a>
         <a href="/contacts" class="btn_contacts">Контакты</a>
     </div>
-    ©2021
+    <span>©2021</span>
 </footer>
 </body>
 </html>

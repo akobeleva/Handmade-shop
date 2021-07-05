@@ -10,9 +10,7 @@ body {
 
 header {
     display: flex;
-    border-bottom: 0.0625em solid #1c1f23;
-    justify-content: space-between;
-    position: relative;
+    flex-direction: column;
 }
 
 footer {
@@ -69,24 +67,35 @@ footer .buttons_info a:hover {
     width: 2em;
 }
 
-.menu {
-    list-style-type: none;
+.menu{
+    background-color: rgba(157, 180, 181, 0.2);
+    border-top: 0.0625em solid #1c1f23;
     border-bottom: 0.0625em solid #1c1f23;
-    display: flex;
-    padding-bottom: 0.625em;
 }
- .menu li {
+
+.menu_list {
+    list-style-type: none;
+    display: flex;
+}
+
+.menu_list li {
      flex-basis: auto;
      flex-grow: 1;
      display: inline-block;
  }
 
- .menu li a {
+.menu_list li a {
      display: block;
      text-decoration: none;
      color: #1c1f23;
  }
 
-.menu li a:hover {
+.menu_list li a:hover {
     color: #535658;
+}
+
+header div.subheader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
 }

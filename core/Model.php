@@ -9,10 +9,9 @@ abstract class Model
     protected $db;
     protected $table;
 
-    public function __construct(string $tableName = null)
+    public function __construct()
     {
         $this->db = DB::getInstance();
-        $this->table = $tableName;
     }
 
     public function getAllRows(): array

@@ -11,7 +11,7 @@ class MenuController extends Controller
     public function __construct()
     {
         $this->view = new View();
-        $this->model = new MenuModel('category');
+        $this->model = new MenuModel();
     }
 
     public function indexAction()

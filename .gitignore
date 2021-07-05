@@ -1,3 +1,2 @@
-info.php
-config/database.php
-.idea
+/config/database.php
+/.idea/

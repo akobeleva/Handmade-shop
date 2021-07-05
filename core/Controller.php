@@ -4,8 +4,8 @@ namespace core;
 
 abstract class Controller
 {
-    public $view;
-    public $model;
+    protected $view;
+    protected $model;
 
     public function indexAction()
     {

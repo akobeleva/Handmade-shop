@@ -14,6 +14,6 @@ class MainController extends Controller
 
     public function indexAction()
     {
-        $this->view->renderPage('default.php', 'MainView.php');
+        $this->view->renderPage('MainTemplate.php', 'MainView.php');
     }
 }

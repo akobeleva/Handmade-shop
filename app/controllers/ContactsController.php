@@ -15,6 +15,6 @@ class ContactsController extends Controller
 
     public function indexAction()
     {
-        $this->view->renderPage('MainTemplate.php', 'ContactsView.php');
+        $this->view->renderPage('ContactsView.php');
     }
 }

@@ -1,4 +1,4 @@
-<ul class="menu">
+<ul class="menu_list">
     <li><a href="/catalog">Каталог</a></li>
     <?php
     if (isset($data)) {

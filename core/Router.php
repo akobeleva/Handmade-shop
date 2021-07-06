@@ -15,22 +15,31 @@ class Router
 
     public function __construct()
     {
-        $this->addRoute('', MainController::class);
-        $this->addRoute('/about', AboutController::class);
-        $this->addRoute('/contacts', ContactsController::class);
-        $this->addRoute('/catalog', CatalogController::class);
+        $this->addRoute('', MainController::class, 'index');
+        $this->addRoute('/about', AboutController::class, 'index');
+        $this->addRoute('/contacts', ContactsController::class, 'index');
+        $this->addRoute('/catalog', CatalogController::class, 'index');
     }
 
-    public static function addRoute(string $url, string $controller)
-    {
-        self::$routes[$url] = $controller;
+    public static function addRoute(
+        string $url,
+        string $controller,
+        string $method
+    ) {
+        self::$routes[$url] = array(
+            'controller' => $controller,
+            'method'     => $method
+        );
     }
 
     public static function matchRoute(string $incomingURL): bool
     {
         if (isset(self::$routes[$incomingURL])) {
             self::$currentRoute['url'] = $incomingURL;
-            self::$currentRoute['controller'] = self::$routes[$incomingURL];
+            self::$currentRoute['controller']
+                = self::$routes[$incomingURL]['controller'];
+            self::$currentRoute['method']
+                = self::$routes[$incomingURL]['method'];
             return true;
         }
         return false;
@@ -47,7 +56,8 @@ class Router
         if (self::matchRoute($url)) {
             $controllerName = self::$currentRoute['controller'];
             $controller = new $controllerName();
-            $controller->indexAction();
+            $methodName = self::$currentRoute['method'] . 'Action';
+            $controller->$methodName();
         } else {
             http_response_code(404);
             include '../public/404.html';

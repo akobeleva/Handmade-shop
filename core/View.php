@@ -4,8 +4,11 @@ namespace core;
 
 class View
 {
-    public function renderPage(string $viewName, string $templateName = 'MainTemplate.php')
+    public function renderPage(string $viewName, $data = null, string $templateName = 'MainTemplate.php')
     {
+        if (is_array($data)) {
+            extract($data);
+        }
         $file_view = '../app/views/' . $viewName;
         ob_start();
         require_once $file_view;

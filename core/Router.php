@@ -28,12 +28,10 @@ class Router
 
     public static function matchRoute(string $incomingURL): bool
     {
-        foreach (self::$routes as $url => $controller) {
-            if ($url == $incomingURL) {
-                self::$currentRoute['url'] = $url;
-                self::$currentRoute['controller'] = $controller;
-                return true;
-            }
+        if (isset(self::$routes[$incomingURL])) {
+            self::$currentRoute['url'] = $incomingURL;
+            self::$currentRoute['controller'] = self::$routes[$incomingURL];
+            return true;
         }
         return false;
     }

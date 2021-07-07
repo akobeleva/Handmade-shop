@@ -18,7 +18,7 @@ use app\controllers\MenuController;
     <link href="/css/main.css" rel="stylesheet">
     <title>Handmade shop</title>
 </head>
-<body class="container">
+<body>
 <header>
     <div class="subheader">
         <a href="/" class="logo"><img src="/img/logo.jpg" alt=""></a>

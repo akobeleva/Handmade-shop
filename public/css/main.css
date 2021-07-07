@@ -1,7 +1,6 @@
 body {
     font-family: "Verdana", serif;
     font-size: 16px;
-    max-width: 85%;
     margin: 0.625em auto;
     display: flex;
     flex-direction: column;
@@ -57,6 +56,8 @@ footer .buttons_info a:hover {
 
 .content {
     flex-grow: 1;
+    margin-left: 10em;
+    margin-right: 10em;
 }
 
 .content .table_contacts img{

@@ -4,9 +4,10 @@
         <?php
         if (isset($data)) {
             foreach ($data as $item): ?>
-                <div class="col-lg-3 mb-4">
-                    <div class="card">
-                        <a href="/"><img class="card-img-top" src="/img/avatar.png" alt=""></a>
+                <div class="col-lg-4 mb-4">
+                    <div class="card pt-3">
+                        <a href="/"><img class="card-img-top" src="/img/<?php
+                            echo $item['image_name'] ?>" alt=""></a>
                         <div class="card-body text-center">
                             <a href="/" class="grey-text">
                                 <h5><?php

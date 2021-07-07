@@ -15,10 +15,10 @@ class Router
 
     public function __construct()
     {
-        $this->addRoute('', MainController::class, 'index');
-        $this->addRoute('/about', AboutController::class, 'index');
-        $this->addRoute('/contacts', ContactsController::class, 'index');
-        $this->addRoute('/catalog', CatalogController::class, 'index');
+        $this->addRoute('', MainController::class, 'indexAction');
+        $this->addRoute('/about', AboutController::class, 'indexAction');
+        $this->addRoute('/contacts', ContactsController::class, 'indexAction');
+        $this->addRoute('/catalog', CatalogController::class, 'indexAction');
     }
 
     public static function addRoute(
@@ -52,11 +52,16 @@ class Router
      * */
     public static function dispatch()
     {
-        $url = rtrim($_SERVER['REQUEST_URI'], '/');
-        if (self::matchRoute($url)) {
-            $controllerName = self::$currentRoute['controller'];
+        if ($_GET) {
+            $url = rtrim($_SERVER['REQUEST_URI'], $_SERVER['QUERY_STRING']);
+            $url = rtrim($url, '/?');
+        } else {
+            $url = rtrim($_SERVER['REQUEST_URI'], '/');
+        }
+        if (isset(self::$routes[$url])) {
+            $controllerName = self::$routes[$url]['controller'];
             $controller = new $controllerName();
-            $methodName = self::$currentRoute['method'] . 'Action';
+            $methodName = self::$routes[$url]['method'];
             $controller->$methodName();
         } else {
             http_response_code(404);

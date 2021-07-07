@@ -11,7 +11,6 @@ use app\controllers\MainController;
 class Router
 {
     protected static $routes = [];
-    protected static $currentRoute = [];
 
     public function __construct()
     {
@@ -30,19 +29,6 @@ class Router
             'controller' => $controller,
             'method'     => $method
         );
-    }
-
-    public static function matchRoute(string $incomingURL): bool
-    {
-        if (isset(self::$routes[$incomingURL])) {
-            self::$currentRoute['url'] = $incomingURL;
-            self::$currentRoute['controller']
-                = self::$routes[$incomingURL]['controller'];
-            self::$currentRoute['method']
-                = self::$routes[$incomingURL]['method'];
-            return true;
-        }
-        return false;
     }
 
     /**

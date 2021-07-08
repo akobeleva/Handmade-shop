@@ -19,15 +19,35 @@ class SimplePageController extends Controller
         $this->view->renderPage('MainView.php');
     }
 
-    public function aboutAction(){
+    public function aboutAction()
+    {
         $text = $this->model->getTextByTitle('О нас');
-        $vars['text'] = $text[0]['text'];
-        $this->view->render( 'О нас', $vars );
+        $content = $this->view->renderTemplate(
+            'simple_page_tpl.php',
+            [
+                'title' => 'О нас',
+                'text'  => $text[0]['text']
+            ]
+        );
+        echo $this->view->renderTemplate(
+            'main_tpl.php',
+            ['content' => $content]
+        );
     }
 
-    public function contactsAction(){
+    public function contactsAction()
+    {
         $text = $this->model->getTextByTitle('Контакты');
-        $vars['text'] = $text[0]['text'];
-        $this->view->render( 'Контакты', $vars);
+        $content = $this->view->renderTemplate(
+            'simple_page_tpl.php',
+            [
+                'title' => 'Контакты',
+                'text'  => $text[0]['text']
+            ]
+        );
+        echo $this->view->renderTemplate(
+            'main_tpl.php',
+            ['content' => $content]
+        );
     }
 }

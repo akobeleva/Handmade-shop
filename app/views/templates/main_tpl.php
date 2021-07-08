@@ -37,7 +37,11 @@ use app\controllers\MenuController;
     </nav>
 </header>
 <div class="content">
-    <?= $content ?>
+    <?php
+    if (isset($content)) {
+        echo $content;
+    }
+    ?>
 </div>
 <footer>
     <span>Авторские изделия ручной работы</span>

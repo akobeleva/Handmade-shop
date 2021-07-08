@@ -27,10 +27,11 @@ class View
         require_once VIEW_ROOT . $componentViewName;
     }
 
-    public function render($title, $vars = []){
+    public function renderTemplate(string $templateName, $vars = []){
+        extract($vars);
         ob_start();
-        require_once VIEW_ROOT . 'templates/simple_page_tpl.php';
+        require_once VIEW_ROOT . 'templates/'. $templateName;
         $content = ob_get_clean();
-        require_once VIEW_ROOT . 'templates/main_tpl.php';
+        return $content;
     }
 }

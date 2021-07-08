@@ -2,10 +2,8 @@
 
 namespace core;
 
-use app\controllers\AboutController;
 use app\controllers\CatalogController;
-use app\controllers\ContactsController;
-use app\controllers\MainController;
+use app\controllers\SimplePageController;
 
 
 class Router
@@ -14,9 +12,9 @@ class Router
 
     public function __construct()
     {
-        $this->addRoute('', MainController::class, 'indexAction');
-        $this->addRoute('/about', AboutController::class, 'indexAction');
-        $this->addRoute('/contacts', ContactsController::class, 'indexAction');
+        $this->addRoute('', SimplePageController::class, 'indexAction');
+        $this->addRoute('/about', SimplePageController::class, 'aboutAction');
+        $this->addRoute('/contacts', SimplePageController::class, 'contactsAction');
         $this->addRoute('/catalog', CatalogController::class, 'indexAction');
     }
 

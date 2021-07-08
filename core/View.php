@@ -29,7 +29,7 @@ class View
 
     public function render($title, $vars = []){
         ob_start();
-        require_once VIEW_ROOT . 'templates/content_tpl.php';
+        require_once VIEW_ROOT . 'templates/simple_page_tpl.php';
         $content = ob_get_clean();
         require_once VIEW_ROOT . 'templates/main_tpl.php';
     }

@@ -19,19 +19,31 @@ class View
         require_once $file_layout;
     }
 
-    public function renderComponent(string $componentViewName, $data = null)
+    public function renderTemplate(string $templateName, $vars = [])
     {
-        if (is_array($data)) {
-            extract($data);
-        }
-        require_once VIEW_ROOT . $componentViewName;
-    }
-
-    public function renderTemplate(string $templateName, $vars = []){
         extract($vars);
         ob_start();
-        require_once VIEW_ROOT . 'templates/'. $templateName;
+        require_once VIEW_ROOT . 'templates/' . $templateName;
         $content = ob_get_clean();
         return $content;
+    }
+
+    public function renderLeftMenuPageView($vars)
+    {
+        $leftMenu = $this->renderTemplate(
+            'left_menu_tpl.php',
+            ['leftMenuItems' => $vars]
+        );
+        $content = $this->renderTemplate(
+            'simple_page_tpl.php',
+            [
+                'title' => 'Каталог',
+                'text' => $leftMenu
+            ]
+        );
+        echo $this->renderTemplate(
+            'main_tpl.php',
+            ['content' => $content]
+        );
     }
 }

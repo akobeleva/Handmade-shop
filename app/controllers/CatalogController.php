@@ -19,24 +19,15 @@ class CatalogController extends Controller
         if (!$_GET){
             $data = $this->model->getAllRows();
             $this->view->renderPage('CatalogView.php', $data);
+        } else {
+            $this->categoryAction($_GET['category']);
         }
-        else $this->categoryAction($_GET['category']);
     }
 
-    private function categoryAction($categoryId){
+    private function categoryAction($categoryId)
+    {
         $subCatController = new SubcategoryController();
         $subcategories = $subCatController->subcategoryAction($categoryId);
-        $leftMenu = $this->view->renderTemplate('left_menu_tpl.php', ['menuItems'=>$subcategories]);
-        $content = $this->view->renderTemplate(
-            'simple_page_tpl.php',
-            [
-                'title' => 'Каталог',
-                'leftMenu'  => $leftMenu
-            ]
-        );
-        echo $this->view->renderTemplate(
-            'main_tpl.php',
-            ['content' => $content]
-        );
+        $this->view->renderLeftMenuPageView($subcategories);
     }
 }

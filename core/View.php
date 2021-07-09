@@ -6,47 +6,44 @@ define('VIEW_ROOT', '../app/views/');
 
 class View
 {
-    public function renderPage(
-        string $viewName,
-        $data = null,
-        string $templateName = 'main_tpl.php'
-    ) {
-        if (is_array($data)) {
-            extract($data);
-        }
-        $file_view = VIEW_ROOT . $viewName;
-        ob_start();
-        require_once $file_view;
-        $content = ob_get_clean();
-        $file_layout = VIEW_ROOT . 'templates/' . $templateName;
-        require_once $file_layout;
-    }
-
     public function renderTemplate(string $templateName, $vars = [])
     {
-        extract($vars);
+        if (is_array($vars)){
+            extract($vars);
+        }
         ob_start();
-        require_once VIEW_ROOT . 'templates/' . $templateName;
+        if (file_exists(VIEW_ROOT . 'templates/' . $templateName)) {
+            require_once VIEW_ROOT . 'templates/' . $templateName;
+        } else {
+            require_once VIEW_ROOT . $templateName;
+        }
         $content = ob_get_clean();
         return $content;
     }
 
-    public function renderLeftMenuPageView($vars)
+    public function renderLeftMenuPageView($vars = [])
     {
-        $leftMenu = $this->renderTemplate(
-            'left_menu_tpl.php',
-            ['leftMenuItems' => $vars]
-        );
-        $content = $this->renderTemplate(
-            'simple_page_tpl.php',
-            [
-                'title' => 'Каталог',
-                'text'  => $leftMenu
-            ]
-        );
-        echo $this->renderTemplate(
-            'main_tpl.php',
-            ['content' => $content]
-        );
+        $leftMenu = $this->renderTemplate('left_menu_tpl.php', $vars);
+        $vars['text'] = $leftMenu;
+        $this->renderSimplePageView($vars);
+    }
+
+    public function renderCatalogView($vars = [])
+    {
+        $catalog = $this->renderTemplate('catalog_tpl.php', $vars);
+        $vars['text'] = $catalog;
+        $this->renderSimplePageView($vars);
+    }
+
+    public function renderSimplePageView($vars = [])
+    {
+        $content = $this->renderTemplate('simple_page_tpl.php', $vars);
+        $vars['content'] = $content;
+        $this->renderMainView($vars);
+    }
+
+    public function renderMainView($vars = [])
+    {
+        echo $this->renderTemplate('main_tpl.php', $vars);
     }
 }

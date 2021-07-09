@@ -6,8 +6,13 @@ if (isset($title)) : ?>
 <?php
 endif; ?>
 <?php
-if (isset($vars)) :?>
+if (isset($text)) :?>
     <div>  <?php
-        echo $vars['text']; ?> </div>
+        echo $text; ?> </div>
+<?php
+endif; ?>
+<?php if (isset($leftMenu)) :?>
+    <div>  <?php
+        echo $leftMenu; ?> </div>
 <?php
 endif; ?>

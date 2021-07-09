@@ -46,4 +46,8 @@ class View
     {
         echo $this->renderTemplate('main_tpl.php', $vars);
     }
+
+    public function renderRightPageView($vars = []){
+        $this->renderLeftMenuPageView($vars);
+    }
 }

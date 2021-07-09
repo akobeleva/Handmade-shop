@@ -11,8 +11,3 @@ if (isset($text)) :?>
         echo $text; ?> </div>
 <?php
 endif; ?>
-<?php if (isset($leftMenu)) :?>
-    <div>  <?php
-        echo $leftMenu; ?> </div>
-<?php
-endif; ?>

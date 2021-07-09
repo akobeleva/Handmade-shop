@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-use app\models\MenuModel;
+use app\models\CategoryModel;
 use core\Controller;
 use core\View;
 
@@ -11,12 +11,15 @@ class MenuController extends Controller
     public function __construct()
     {
         $this->view = new View();
-        $this->model = new MenuModel();
+        $this->model = new CategoryModel();
     }
 
     public function indexAction()
     {
         $data = $this->model->getAllRows();
-        $this->view->renderComponent('MenuView.php', $data);
+        echo $this->view->renderTemplate(
+            'MenuView.php',
+            ['menuItems' => $data]
+        );
     }
 }

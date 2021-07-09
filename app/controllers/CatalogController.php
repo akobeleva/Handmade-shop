@@ -16,9 +16,11 @@ class CatalogController extends Controller
 
     public function indexAction()
     {
-        if (!$_GET){
+        if (!$_GET) {
             $data = $this->model->getAllRows();
-            $this->view->renderPage('CatalogView.php', $data);
+            $vars['title'] = 'Каталог';
+            $vars['catalogItems'] = $data;
+            $this->view->renderCatalogView($vars);
         } else {
             $this->categoryAction($_GET['category']);
         }

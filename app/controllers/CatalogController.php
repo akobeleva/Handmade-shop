@@ -29,6 +29,10 @@ class CatalogController extends Controller
         $title = $this->model->getCategoryNameById($_get['id']);
         $vars['title'] = $title[0]['name'];
         $vars['leftMenuItems'] = $subcategories;
-        $this->view->renderLeftMenuPageView($vars);
+        if (isset($_get['subcategory'])){
+            $vars['rightContent'] = 'Подкатегория '.$_get['subcategory'];
+            $this->view->renderRightPageView($vars);
+        }
+        else $this->view->renderLeftMenuPageView($vars);
     }
 }

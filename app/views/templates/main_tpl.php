@@ -32,7 +32,7 @@ use app\controllers\MenuController;
     <nav class="menu">
         <?php
         $menuController = new MenuController();
-        $menuController->indexAction();
+        $menuController->indexAction($_GET);
         ?>
     </nav>
 </header>

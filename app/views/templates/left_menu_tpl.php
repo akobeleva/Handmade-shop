@@ -6,7 +6,7 @@
                 <div class="list-group">
                     <?php
                     foreach ($leftMenuItems as $item): ?>
-                        <a href="/catalog/?category=<?php
+                        <a href="/catalog/category/?id=<?php
                         echo $item['category_id'] ?>&subcategory=<?php
                         echo $item['id'] ?>" class="list-group-item"><?php
                             echo $item['name'] ?></a>
@@ -15,6 +15,13 @@
                 </div>
             <?php
             endif; ?>
+        </div>
+        <div class="col-md-9">
+            <?php
+            if (isset($rightContent)) {
+                echo $rightContent;
+            }
+            ?>
         </div>
     </div>
 </div>

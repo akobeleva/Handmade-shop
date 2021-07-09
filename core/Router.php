@@ -17,6 +17,7 @@ class Router
         $this->addRoute('/contacts', SimplePageController::class, 'contactsAction');
         $this->addRoute('/catalog', CatalogController::class, 'indexAction');
         $this->addRoute('/catalog/category', CatalogController::class, 'categoryAction');
+        $this->addRoute('/catalog/category/subcategory', CatalogController::class, 'subcategoryAction');
     }
 
     public static function addRoute(

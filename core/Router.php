@@ -16,6 +16,7 @@ class Router
         $this->addRoute('/about', SimplePageController::class, 'aboutAction');
         $this->addRoute('/contacts', SimplePageController::class, 'contactsAction');
         $this->addRoute('/catalog', CatalogController::class, 'indexAction');
+        $this->addRoute('/catalog/category', CatalogController::class, 'categoryAction');
     }
 
     public static function addRoute(
@@ -46,7 +47,7 @@ class Router
             $controllerName = self::$routes[$url]['controller'];
             $controller = new $controllerName();
             $methodName = self::$routes[$url]['method'];
-            $controller->$methodName();
+            $controller->$methodName($_GET);
         } else {
             http_response_code(404);
             include '../public/404.html';

@@ -6,8 +6,11 @@ define('VIEW_ROOT', '../app/views/');
 
 class View
 {
-    public function renderPage(string $viewName, $data = null, string $templateName = 'main_tpl.php')
-    {
+    public function renderPage(
+        string $viewName,
+        $data = null,
+        string $templateName = 'main_tpl.php'
+    ) {
         if (is_array($data)) {
             extract($data);
         }
@@ -38,7 +41,7 @@ class View
             'simple_page_tpl.php',
             [
                 'title' => 'Каталог',
-                'text' => $leftMenu
+                'text'  => $leftMenu
             ]
         );
         echo $this->renderTemplate(

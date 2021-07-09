@@ -11,5 +11,4 @@ class MenuModel extends Model
         parent::__construct();
         $this->table = 'category';
     }
-
 }

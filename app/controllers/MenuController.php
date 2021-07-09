@@ -14,7 +14,7 @@ class MenuController extends Controller
         $this->model = new CategoryModel();
     }
 
-    public function indexAction()
+    public function indexAction($_get)
     {
         $data = $this->model->getAllRows();
         echo $this->view->renderTemplate(

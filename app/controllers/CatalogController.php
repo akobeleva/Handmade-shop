@@ -14,23 +14,19 @@ class CatalogController extends Controller
         $this->model = new CategoryModel();
     }
 
-    public function indexAction()
+    public function indexAction($_get)
     {
-        if (!$_GET) {
-            $data = $this->model->getAllRows();
-            $vars['title'] = 'Каталог';
-            $vars['catalogItems'] = $data;
-            $this->view->renderCatalogView($vars);
-        } else {
-            $this->categoryAction($_GET['category']);
-        }
+        $data = $this->model->getAllRows();
+        $vars['title'] = 'Каталог';
+        $vars['catalogItems'] = $data;
+        $this->view->renderCatalogView($vars);
     }
 
-    private function categoryAction($categoryId)
+    public function categoryAction($_get)
     {
         $subCatController = new SubcategoryController();
-        $subcategories = $subCatController->subcategoryAction($categoryId);
-        $title = $this->model->getCategoryNameById($categoryId);
+        $subcategories = $subCatController->subcategoryAction($_get['id']);
+        $title = $this->model->getCategoryNameById($_get['id']);
         $vars['title'] = $title[0]['name'];
         $vars['leftMenuItems'] = $subcategories;
         $this->view->renderLeftMenuPageView($vars);

@@ -14,12 +14,12 @@ class SimplePageController extends Controller
         $this->model = new SimplePageModel();
     }
 
-    public function indexAction()
+    public function indexAction($_get)
     {
         $this->view->renderSimplePageView(['title'=>'MAIN']);
     }
 
-    public function aboutAction()
+    public function aboutAction($_get)
     {
         $text = $this->model->getTextByTitle('О нас');
         $vars['title'] = 'О нас';
@@ -27,7 +27,7 @@ class SimplePageController extends Controller
         $this->view->renderSimplePageView($vars);
     }
 
-    public function contactsAction()
+    public function contactsAction($_get)
     {
         $text = $this->model->getTextByTitle('Контакты');
         $vars['title'] = 'Контакты';

@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-use app\models\CatalogModel;
+use app\models\CategoryModel;
 use core\Controller;
 use core\View;
 
@@ -11,7 +11,7 @@ class CatalogController extends Controller
     public function __construct()
     {
         $this->view = new View();
-        $this->model = new CatalogModel();
+        $this->model = new CategoryModel();
     }
 
     public function indexAction()
@@ -30,6 +30,9 @@ class CatalogController extends Controller
     {
         $subCatController = new SubcategoryController();
         $subcategories = $subCatController->subcategoryAction($categoryId);
-        $this->view->renderLeftMenuPageView($subcategories);
+        $title = $this->model->getCategoryNameById($categoryId);
+        $vars['title'] = $title[0]['name'];
+        $vars['leftMenuItems'] = $subcategories;
+        $this->view->renderLeftMenuPageView($vars);
     }
 }

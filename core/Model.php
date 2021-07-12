@@ -19,4 +19,10 @@ abstract class Model
         $sql = "SELECT * FROM $this->table";
         return $this->db->executeQuery($sql);
     }
+
+    public function getRowById($id): array
+    {
+        $sql = "SELECT * FROM $this->table WHERE id = " . $id;
+        return $this->db->executeQuery($sql);
+    }
 }

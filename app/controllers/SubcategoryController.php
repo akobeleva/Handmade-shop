@@ -14,8 +14,13 @@ class SubcategoryController extends Controller
         $this->model = new SubcategoryModel();
     }
 
-    public function subcategoryAction($categoryId): array
+    public function getSubcategoriesByCategoryId($categoryId): array
     {
         return $this->model->getSubcategoryByCategoryId($categoryId);
+    }
+
+    public function getSubcategoryById($subcategoryId): array
+    {
+        return $this->model->getRowById($subcategoryId);
     }
 }

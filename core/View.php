@@ -8,7 +8,7 @@ class View
 {
     public function renderTemplate(string $templateName, $vars = [])
     {
-        if (is_array($vars)){
+        if (is_array($vars)) {
             extract($vars);
         }
         ob_start();
@@ -47,7 +47,10 @@ class View
         echo $this->renderTemplate('main_tpl.php', $vars);
     }
 
-    public function renderRightPageView($vars = []){
+    public function renderRightPageView($vars = [])
+    {
+        $rightContent = $this->renderTemplate('catalog_tpl.php', $vars);
+        $vars['rightContent'] = $rightContent;
         $this->renderLeftMenuPageView($vars);
     }
 }

@@ -25,14 +25,19 @@ class CatalogController extends Controller
     public function categoryAction($_get)
     {
         $subCatController = new SubcategoryController();
-        $subcategories = $subCatController->subcategoryAction($_get['id']);
-        $title = $this->model->getCategoryNameById($_get['id']);
-        $vars['title'] = $title[0]['name'];
+        $subcategories = $subCatController->getSubcategoriesByCategoryId($_get['id']);
         $vars['leftMenuItems'] = $subcategories;
+        $productController = new ProductController();
         if (isset($_get['subcategory'])){
-            $vars['rightContent'] = 'Подкатегория '.$_get['subcategory'];
-            $this->view->renderRightPageView($vars);
+            $title = $subCatController->getSubcategoryById($_get['subcategory']);
+            $products = $productController->getProductsBySubcategoryId($_get['subcategory']);
         }
-        else $this->view->renderLeftMenuPageView($vars);
+        else {
+            $title = $this->model->getCategoryNameById($_get['id']);
+            $products = $productController->getProductsByCategoryId($_get['id']);
+        }
+        $vars['title'] = $title[0]['name'];
+        $vars['catalogItems'] = $products;
+        $this->view->renderRightPageView($vars);
     }
 }

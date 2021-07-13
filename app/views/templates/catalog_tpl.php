@@ -4,7 +4,12 @@
         if (isset($catalogItems)):?>
             <?php
             foreach ($catalogItems as $item): ?>
-                <div class="col-lg-4 mb-4">
+                <div class="col-md-<?php
+                if (isset($item['subcategory_id'])) {
+                    echo '4';
+                } else {
+                    echo '3';
+                } ?> mb-4">
                     <div class="card p-3 h-100">
                         <?php
                         if (isset($item['subcategory_id'])) { ?>

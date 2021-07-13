@@ -53,4 +53,10 @@ class View
         $vars['rightContent'] = $rightContent;
         $this->renderLeftMenuPageView($vars);
     }
+
+    public function renderProductPageView($vars = []){
+        $text = $this->renderTemplate('ProductView.php', $vars);
+        $vars['text'] = $text;
+        $this->renderSimplePageView($vars);
+    }
 }

@@ -23,4 +23,9 @@ class ProductController extends Controller
     {
         return $this->model->getProductsBySubcategoryId($subcategoryId);
     }
+
+    public function getProductById($productId): array
+    {
+        return $this->model->getRowById($productId);
+    }
 }

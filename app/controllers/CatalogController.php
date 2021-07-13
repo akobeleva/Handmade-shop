@@ -52,7 +52,7 @@ class CatalogController extends Controller
     {
         $productController = new ProductController();
         $product = $productController->getProductById($_get['id']);
-        $vars['product'] = $product;
+        $vars['product'] = $product[0];
         $this->view->renderProductPageView($vars);
     }
 }

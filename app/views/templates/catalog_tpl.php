@@ -6,19 +6,31 @@
             foreach ($catalogItems as $item): ?>
                 <div class="col-lg-4 mb-4">
                     <div class="card p-3 h-100">
-                        <a href="catalog/category/?id=<?php
-                        echo $item['id'] ?>">
-                            <img class="card-img-top
+                        <?php
+                        if (isset($item['subcategory_id'])) { ?>
+                            <a href="/catalog/product/?id=<?php
+                            echo $item['id'] ?>">
+                                <img class="card-img-top product_card"
+                                     src="/img/<?php
+                                     echo $item['image_name'] ?>" alt="">
+                            </a>
                             <?php
-                            if (isset($item['subcategory_id'])) {
-                                echo 'product_card';
-                            }
-                            ?> " src="/img/<?php
-                            echo $item['image_name'] ?>"
-                                 alt="">
-                        </a>
+                        } else { ?>
+                            <a href="/catalog/category/?id=<?php
+                            echo $item['id'] ?>">
+                                <img class="card-img-top" src="/img/<?php
+                                echo $item['image_name'] ?>" alt="">
+                            </a>
+                            <?php
+                        } ?>
                         <div class="card-body">
-                            <a href="catalog/category/?id=<?php
+                            <a href="/catalog/<?php
+                            if (isset($item['subcategory_id'])) {
+                                echo 'product';
+                            } else {
+                                echo 'category';
+                            }
+                            ?>/?id=<?php
                             echo $item['id'] ?>" class="grey-text text-center ">
                                 <h5><?php
                                     echo $item['name'] ?></h5>

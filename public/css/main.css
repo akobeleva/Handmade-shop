@@ -109,3 +109,22 @@ header div.subheader {
 .catalog a:hover{
     color: #535658;
 }
+
+.product_card{
+    height: 14em;
+    object-fit: cover;
+}
+
+.catalog .product_buttons img{
+    width: 1em;
+    height: 1em;
+}
+
+.btn-circle {
+    width: 2em;
+    height: 2em;
+    border-radius: 1em;
+    text-align: center;
+    padding-left: 0;
+    padding-right: 0;
+}

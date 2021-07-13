@@ -5,7 +5,7 @@
             <?php
             foreach ($catalogItems as $item): ?>
                 <div class="col-lg-4 mb-4">
-                    <div class="card p-3">
+                    <div class="card p-3 h-100">
                         <a href="catalog/category/?id=<?php
                         echo $item['id'] ?>">
                             <img class="card-img-top

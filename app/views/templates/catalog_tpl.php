@@ -51,11 +51,11 @@
                                 if (isset($item['price'])): ?>
                                     <div class="product_buttons text-end">
                                         <button type="button"
-                                                class="btn btn btn-outline-info btn-circle">
+                                                class="btn btn-outline-info btn-circle">
                                             <img src="/img/heart.png"
                                                  alt=""></button>
                                         <button type="button"
-                                                class="btn btn btn-outline-info btn-circle">
+                                                class="btn btn-outline-info btn-circle">
                                             <img src="/img/shopping-bag.png"
                                                  alt=""></button>
                                     </div>

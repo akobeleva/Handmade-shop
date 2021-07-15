@@ -18,7 +18,7 @@ class MenuController extends Controller
     {
         $data = $this->model->getCategoriesByWeight();
         echo $this->view->renderTemplate(
-            'MenuView.php',
+            'menu_view.php',
             ['menuItems' => $data]
         );
     }

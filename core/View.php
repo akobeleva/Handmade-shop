@@ -55,7 +55,7 @@ class View
     }
 
     public function renderProductPageView($vars = []){
-        $text = $this->renderTemplate('ProductView.php', $vars);
+        $text = $this->renderTemplate('product_view.php', $vars);
         $vars['text'] = $text;
         $this->renderSimplePageView($vars);
     }

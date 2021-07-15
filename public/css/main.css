@@ -44,6 +44,11 @@ header .buttons img {
     height: 3em;
 }
 
+header .search-from {
+    display: -webkit-flex;
+    align-items: center;
+}
+
 footer .buttons_info a {
     margin-right: 1em;
     text-decoration: none;
@@ -60,7 +65,7 @@ footer .buttons_info a:hover {
     margin-right: 10em;
 }
 
-.content .table_contacts img{
+.content .table_contacts img {
     max-width: 70%;
 }
 
@@ -68,7 +73,7 @@ footer .buttons_info a:hover {
     width: 2em;
 }
 
-.menu{
+.menu {
     background-color: rgba(157, 180, 181, 0.2);
     border-top: 0.0625em solid #1c1f23;
     border-bottom: 0.0625em solid #1c1f23;
@@ -80,16 +85,16 @@ footer .buttons_info a:hover {
 }
 
 .menu_list li {
-     flex-basis: auto;
-     flex-grow: 1;
-     display: inline-block;
- }
+    flex-basis: auto;
+    flex-grow: 1;
+    display: inline-block;
+}
 
 .menu_list li a {
-     display: block;
-     text-decoration: none;
-     color: #1c1f23;
- }
+    display: block;
+    text-decoration: none;
+    color: #1c1f23;
+}
 
 .menu_list li a:hover {
     color: #535658;
@@ -98,25 +103,25 @@ footer .buttons_info a:hover {
 header div.subheader {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
     margin-bottom: 1em;
 }
 
-.catalog a{
+.catalog a {
     text-decoration: none;
     color: #1c1f23;
 }
 
-.catalog a:hover{
+.catalog a:hover {
     color: #535658;
 }
 
-.product_card{
+.product_card {
     height: 14em;
     object-fit: cover;
 }
 
-.product_buttons img{
+.product_buttons img {
     width: 1em;
     height: 1em;
 }

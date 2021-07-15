@@ -16,7 +16,7 @@ class MenuController extends Controller
 
     public function indexAction($_get)
     {
-        $data = $this->model->getAllRows();
+        $data = $this->model->getCategoriesByWeight();
         echo $this->view->renderTemplate(
             'MenuView.php',
             ['menuItems' => $data]

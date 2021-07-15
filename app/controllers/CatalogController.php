@@ -16,7 +16,7 @@ class CatalogController extends Controller
 
     public function indexAction($_get)
     {
-        $data = $this->model->getAllRows();
+        $data = $this->model->getCategoriesByWeight();
         $vars['title'] = 'Каталог';
         $vars['catalogItems'] = $data;
         $this->view->renderCatalogView($vars);

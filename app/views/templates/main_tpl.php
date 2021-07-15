@@ -12,6 +12,8 @@ use app\controllers\MenuController;
           rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
           crossorigin="anonymous">
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
@@ -22,7 +24,12 @@ use app\controllers\MenuController;
 <header>
     <div class="subheader">
         <a href="/" class="logo"><img src="/img/logo.jpg" alt=""></a>
-
+        <form class="d-flex search-from" action="/search/" method="get">
+            <input name="s" class="form-control me-2" type="search"
+                   placeholder="Поиск товаров" aria-label="Search">
+            <button class="btn btn-outline-secondary" type="submit">
+                <i class="fa fa-search"></i></button>
+        </form>
         <div class="buttons">
             <a href="/"><img src="/img/shopping-bag.png" alt=""></a>
             <a href="/"><img src="/img/avatar.png" alt=""></a>

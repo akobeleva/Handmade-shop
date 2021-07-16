@@ -2,7 +2,6 @@
 
 namespace app\controllers;
 
-use app\models\CategoryModel;
 use core\Controller;
 use core\View;
 
@@ -11,14 +10,14 @@ class CatalogController extends Controller
     public function __construct()
     {
         $this->view = new View();
-        $this->model = new CategoryModel();
     }
 
     public function indexAction($_get)
     {
-        $data = $this->model->getCategoriesByWeight();
+        $categoryController = new CategoryController();
+        $categories = $categoryController->getCategories();
         $vars['title'] = 'Каталог';
-        $vars['catalogItems'] = $data;
+        $vars['catalogItems'] = $categories;
         $this->view->renderCatalogView($vars);
     }
 

@@ -8,6 +8,6 @@ class MenuView extends View
 {
     public function render($vars = [])
     {
-        echo $this->renderTemplate('menu_view.php', $vars);
+        echo $this->renderTemplate('menu_tpl.php', $vars);
     }
 }

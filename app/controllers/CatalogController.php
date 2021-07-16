@@ -16,7 +16,6 @@ class CatalogController extends Controller
     {
         $categoryController = new CategoryController();
         $categories = $categoryController->getCategories();
-        $vars['title'] = 'Каталог';
         $vars['catalogItems'] = $categories;
         $this->view->renderCatalogView($vars);
     }

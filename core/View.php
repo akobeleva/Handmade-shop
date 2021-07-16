@@ -13,9 +13,9 @@ abstract class View
         }
         ob_start();
         if (file_exists(VIEW_ROOT . 'templates/' . $templateName)) {
-            require_once VIEW_ROOT . 'templates/' . $templateName;
+            require VIEW_ROOT . 'templates/' . $templateName;
         } else {
-            require_once VIEW_ROOT . $templateName;
+            require VIEW_ROOT . $templateName;
         }
         return ob_get_clean();
     }

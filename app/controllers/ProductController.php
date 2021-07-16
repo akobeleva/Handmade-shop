@@ -14,6 +14,14 @@ class ProductController extends Controller
         $this->model = new ProductModel();
     }
 
+    public function productAction($_get)
+    {
+        $productController = new ProductController();
+        $product = $productController->getProductById($_get['id']);
+        $vars['product'] = $product[0];
+        $this->view->renderProductPageView($vars);
+    }
+
     public function getProductsByCategoryId($categoryId): array
     {
         return $this->model->getProductsByCategoryId($categoryId);

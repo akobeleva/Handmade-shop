@@ -19,12 +19,4 @@ class CatalogController extends Controller
         $vars['catalogItems'] = $categories;
         $this->view->renderCatalogView($vars);
     }
-
-    public function productAction($_get)
-    {
-        $productController = new ProductController();
-        $product = $productController->getProductById($_get['id']);
-        $vars['product'] = $product[0];
-        $this->view->renderProductPageView($vars);
-    }
 }

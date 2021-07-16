@@ -4,6 +4,7 @@ namespace core;
 
 use app\controllers\CatalogController;
 use app\controllers\CategoryController;
+use app\controllers\ProductController;
 use app\controllers\SearchController;
 use app\controllers\SimplePageController;
 
@@ -19,7 +20,7 @@ class Router
         $this->addRoute('/contacts', SimplePageController::class, 'contactsAction');
         $this->addRoute('/catalog', CatalogController::class, 'indexAction');
         $this->addRoute('/catalog/category', CategoryController::class, 'categoryAction');
-        $this->addRoute('/catalog/product', CatalogController::class, 'productAction');
+        $this->addRoute('/catalog/product', ProductController::class, 'productAction');
         $this->addRoute("/search", SearchController::class, 'indexAction');
     }
 

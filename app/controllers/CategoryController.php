@@ -3,14 +3,14 @@
 namespace app\controllers;
 
 use app\models\CategoryModel;
-use app\views\RightContentView;
+use app\views\RightCategoryView;
 use core\Controller;
 
 class CategoryController extends Controller
 {
     public function __construct()
     {
-        $this->view = new RightContentView();
+        $this->view = new RightCategoryView();
         $this->model = new CategoryModel();
     }
 

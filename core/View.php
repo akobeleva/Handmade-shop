@@ -25,7 +25,7 @@ class View
     {
         $leftMenu = $this->renderTemplate('left_menu_tpl.php', $vars);
         $vars['text'] = $leftMenu;
-        $this->renderSimplePageView($vars);
+        $this->renderPageContentView($vars);
     }
 
     public function renderCatalogView($vars = [])
@@ -33,10 +33,10 @@ class View
         $catalog = $this->renderTemplate('catalog_tpl.php', $vars);
         $vars['text'] = $catalog;
         $vars['title'] = 'Каталог';
-        $this->renderSimplePageView($vars);
+        $this->renderPageContentView($vars);
     }
 
-    public function renderSimplePageView($vars = [])
+    public function renderPageContentView($vars = [])
     {
         $content = $this->renderTemplate('simple_page_tpl.php', $vars);
         $vars['content'] = $content;
@@ -58,6 +58,6 @@ class View
     public function renderProductPageView($vars = []){
         $text = $this->renderTemplate('product_view.php', $vars);
         $vars['text'] = $text;
-        $this->renderSimplePageView($vars);
+        $this->renderPageContentView($vars);
     }
 }

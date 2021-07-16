@@ -4,9 +4,9 @@ namespace core;
 
 define('VIEW_ROOT', '../app/views/');
 
-class View
+abstract class View
 {
-    public function renderTemplate(string $templateName, $vars = [])
+    protected function renderTemplate(string $templateName, $vars = [])
     {
         if (is_array($vars)) {
             extract($vars);
@@ -17,47 +17,10 @@ class View
         } else {
             require_once VIEW_ROOT . $templateName;
         }
-        $content = ob_get_clean();
-        return $content;
+        return ob_get_clean();
     }
 
-    public function renderLeftMenuPageView($vars = [])
+    public function render($vars = [])
     {
-        $leftMenu = $this->renderTemplate('left_menu_tpl.php', $vars);
-        $vars['text'] = $leftMenu;
-        $this->renderPageContentView($vars);
-    }
-
-    public function renderCatalogView($vars = [])
-    {
-        $catalog = $this->renderTemplate('catalog_tpl.php', $vars);
-        $vars['text'] = $catalog;
-        $vars['title'] = 'Каталог';
-        $this->renderPageContentView($vars);
-    }
-
-    public function renderPageContentView($vars = [])
-    {
-        $content = $this->renderTemplate('simple_page_tpl.php', $vars);
-        $vars['content'] = $content;
-        $this->renderMainView($vars);
-    }
-
-    public function renderMainView($vars = [])
-    {
-        echo $this->renderTemplate('main_tpl.php', $vars);
-    }
-
-    public function renderRightPageView($vars = [])
-    {
-        $rightContent = $this->renderTemplate('catalog_tpl.php', $vars);
-        $vars['rightContent'] = $rightContent;
-        $this->renderLeftMenuPageView($vars);
-    }
-
-    public function renderProductPageView($vars = []){
-        $text = $this->renderTemplate('product_view.php', $vars);
-        $vars['text'] = $text;
-        $this->renderPageContentView($vars);
     }
 }

@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 
 use core\Router;
 
-require_once 'autoload.php';
+require_once '../vendor/autoload.php';
 require_once '../libs/functions.php';
 session_start();
 

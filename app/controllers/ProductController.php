@@ -14,7 +14,7 @@ class ProductController extends Controller
         $this->model = new ProductModel();
     }
 
-    public function productAction($_get)
+    public function show($_get)
     {
         $productController = new ProductController();
         $product = $productController->getProductById($_get['id']);

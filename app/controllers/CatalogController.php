@@ -12,7 +12,7 @@ class CatalogController extends Controller
         $this->view = new View();
     }
 
-    public function indexAction($_get)
+    public function show($_get)
     {
         $categoryController = new CategoryController();
         $categories = $categoryController->getCategories();

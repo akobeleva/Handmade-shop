@@ -14,7 +14,7 @@ class SimplePageController extends Controller
         $this->model = new SimplePageModel();
     }
 
-    public function indexAction($_get)
+    public function show($_get)
     {
         $this->view->renderPageContentView(['title'=>'MAIN']);
     }

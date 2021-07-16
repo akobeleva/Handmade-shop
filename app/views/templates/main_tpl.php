@@ -39,7 +39,7 @@ use app\controllers\MenuController;
     <nav class="menu">
         <?php
         $menuController = new MenuController();
-        $menuController->indexAction($_GET);
+        $menuController->show($_GET);
         ?>
     </nav>
 </header>

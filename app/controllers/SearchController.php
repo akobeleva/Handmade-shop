@@ -14,7 +14,7 @@ class SearchController extends Controller
         $this->model = new SearchModel();
     }
 
-    public function indexAction($_get)
+    public function show($_get)
     {
     }
 }

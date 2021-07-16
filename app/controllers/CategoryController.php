@@ -14,7 +14,7 @@ class CategoryController extends Controller
         $this->model = new CategoryModel();
     }
 
-    public function categoryAction($_get)
+    public function show($_get)
     {
         $subCatController = new SubcategoryController();
         $subcategories = $subCatController->getSubcategoriesByCategoryId(

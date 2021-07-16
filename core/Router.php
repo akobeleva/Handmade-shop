@@ -15,13 +15,13 @@ class Router
 
     public function __construct()
     {
-        $this->addRoute('', SimplePageController::class, 'indexAction');
+        $this->addRoute('', SimplePageController::class, 'show');
         $this->addRoute('/about', SimplePageController::class, 'aboutAction');
         $this->addRoute('/contacts', SimplePageController::class, 'contactsAction');
-        $this->addRoute('/catalog', CatalogController::class, 'indexAction');
-        $this->addRoute('/catalog/category', CategoryController::class, 'categoryAction');
-        $this->addRoute('/catalog/product', ProductController::class, 'productAction');
-        $this->addRoute("/search", SearchController::class, 'indexAction');
+        $this->addRoute('/catalog', CatalogController::class, 'show');
+        $this->addRoute('/catalog/category', CategoryController::class, 'show');
+        $this->addRoute('/catalog/product', ProductController::class, 'show');
+        $this->addRoute("/search", SearchController::class, 'show');
     }
 
     public static function addRoute(

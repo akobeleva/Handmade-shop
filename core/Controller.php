@@ -7,7 +7,7 @@ abstract class Controller
     protected $view;
     protected $model;
 
-    public function indexAction($_get)
+    public function show($_get)
     {
     }
 }

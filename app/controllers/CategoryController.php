@@ -3,14 +3,14 @@
 namespace app\controllers;
 
 use app\models\CategoryModel;
+use app\views\RightContentView;
 use core\Controller;
-use core\View;
 
 class CategoryController extends Controller
 {
     public function __construct()
     {
-        $this->view = new View();
+        $this->view = new RightContentView();
         $this->model = new CategoryModel();
     }
 
@@ -37,7 +37,7 @@ class CategoryController extends Controller
         }
         $vars['title'] = $title[0]['name'];
         $vars['catalogItems'] = $products;
-        $this->view->renderRightPageView($vars);
+        $this->view->render($vars);
     }
 
     public function getCategories(): array

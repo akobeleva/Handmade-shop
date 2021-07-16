@@ -3,14 +3,14 @@
 namespace app\controllers;
 
 use app\models\ProductModel;
+use app\views\ProductView;
 use core\Controller;
-use core\View;
 
 class ProductController extends Controller
 {
     public function __construct()
     {
-        $this->view = new View();
+        $this->view = new ProductView();
         $this->model = new ProductModel();
     }
 
@@ -19,7 +19,7 @@ class ProductController extends Controller
         $productController = new ProductController();
         $product = $productController->getProductById($_get['id']);
         $vars['product'] = $product[0];
-        $this->view->renderProductPageView($vars);
+        $this->view->render($vars);
     }
 
     public function getProductsByCategoryId($categoryId): array

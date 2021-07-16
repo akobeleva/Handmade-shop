@@ -4,19 +4,19 @@ namespace app\controllers;
 
 use app\models\SimplePageModel;
 use core\Controller;
-use core\View;
+use app\views\PageContentView;
 
 class SimplePageController extends Controller
 {
     public function __construct()
     {
-        $this->view = new View();
+        $this->view = new PageContentView();
         $this->model = new SimplePageModel();
     }
 
     public function show($_get)
     {
-        $this->view->renderPageContentView(['title'=>'MAIN']);
+        $this->view->render(['title' => 'MAIN']);
     }
 
     public function aboutAction($_get)
@@ -24,7 +24,7 @@ class SimplePageController extends Controller
         $text = $this->model->getTextByTitle('О нас');
         $vars['title'] = 'О нас';
         $vars['text'] = $text[0]['text'];
-        $this->view->renderPageContentView($vars);
+        $this->view->render($vars);
     }
 
     public function contactsAction($_get)
@@ -32,6 +32,6 @@ class SimplePageController extends Controller
         $text = $this->model->getTextByTitle('Контакты');
         $vars['title'] = 'Контакты';
         $vars['text'] = $text[0]['text'];
-        $this->view->renderPageContentView($vars);
+        $this->view->render($vars);
     }
 }

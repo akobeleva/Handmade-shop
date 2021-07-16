@@ -16,4 +16,9 @@ class CategoryController extends Controller
     {
         return $this->model->getCategoriesByWeight();
     }
+
+    public function getCategoryById($id): array
+    {
+        return $this->model->getRowById($id);
+    }
 }

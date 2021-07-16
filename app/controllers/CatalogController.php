@@ -36,7 +36,8 @@ class CatalogController extends Controller
                 $_get['subcategory']
             );
         } else {
-            $title = $this->model->getCategoryNameById($_get['id']);
+            $categoryController = new CategoryController();
+            $title = $categoryController->getCategoryById($_get['id']);
             $products = $productController->getProductsByCategoryId(
                 $_get['id']
             );

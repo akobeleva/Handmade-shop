@@ -2,14 +2,14 @@
 
 namespace app\controllers;
 
-use app\views\CatalogView;
+use app\views\PageView;
 use core\Controller;
 
 class CatalogController extends Controller
 {
     public function __construct()
     {
-        $this->view = new CatalogView();
+        $this->view = new PageView();
     }
 
     public function showCatalogPage($_get)
@@ -17,6 +17,6 @@ class CatalogController extends Controller
         $categoryController = new CategoryController();
         $categories = $categoryController->getCategories();
         $vars['catalogItems'] = $categories;
-        $this->view->render($vars);
+        $this->view->renderCatalogPage($vars);
     }
 }

@@ -7,6 +7,7 @@ use app\controllers\CategoryController;
 use app\controllers\ProductController;
 use app\controllers\SearchController;
 use app\controllers\SimplePageController;
+use app\controllers\SubcategoryController;
 
 
 class Router
@@ -20,6 +21,7 @@ class Router
         $this->addRoute('/contacts', SimplePageController::class, 'contactsAction');
         $this->addRoute('/catalog', CatalogController::class, 'showCatalogPage');
         $this->addRoute('/catalog/category', CategoryController::class, 'showCategoryPage');
+        $this->addRoute('/catalog/subcategory', SubcategoryController::class, 'showSubcategoryPage');
         $this->addRoute('/catalog/product', ProductController::class, 'showProductPage');
         $this->addRoute("/search", SearchController::class, 'show');
     }

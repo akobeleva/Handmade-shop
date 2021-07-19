@@ -22,9 +22,9 @@ class CategoryController extends Controller
         );
         $vars['leftMenuItems'] = $subcategories;
         $productController = new ProductController();
-        $title = $this->getCategoryById($id);
+        $category = $this->getCategoryById($id);
         $products = $productController->getProductsByCategoryId($id);
-        $vars['title'] = $title[0]['name'];
+        $vars['title'] = $category[0]['name'];
         $vars['catalogItems'] = $products;
         $this->view->renderCategoryPage($vars);
     }

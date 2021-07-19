@@ -4,13 +4,13 @@ namespace app\controllers;
 
 use app\models\SimplePageModel;
 use core\Controller;
-use app\views\PageContentView;
+use app\views\PageView;
 
 class SimplePageController extends Controller
 {
     public function __construct()
     {
-        $this->view = new PageContentView();
+        $this->view = new PageView();
         $this->model = new SimplePageModel();
     }
 

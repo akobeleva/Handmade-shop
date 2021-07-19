@@ -6,24 +6,27 @@ use app\controllers\CatalogController;
 use app\controllers\CategoryController;
 use app\controllers\ProductController;
 use app\controllers\SearchController;
-use app\controllers\SimplePageController;
+use app\controllers\StaticPageController;
 use app\controllers\SubcategoryController;
 
 
 class Router
 {
     protected static $routes = [];
+    protected static $aliases = [];
 
     public function __construct()
     {
-        $this->addRoute('', SimplePageController::class, 'show');
-        $this->addRoute('/about', SimplePageController::class, 'aboutAction');
-        $this->addRoute('/contacts', SimplePageController::class, 'contactsAction');
+        $this->addRoute('', StaticPageController::class, 'show');
+        $this->addRoute('/page', StaticPageController::class, 'showStaticPage');
         $this->addRoute('/catalog', CatalogController::class, 'showCatalogPage');
         $this->addRoute('/catalog/category', CategoryController::class, 'showCategoryPage');
         $this->addRoute('/catalog/subcategory', SubcategoryController::class, 'showSubcategoryPage');
         $this->addRoute('/catalog/product', ProductController::class, 'showProductPage');
         $this->addRoute("/search", SearchController::class, 'show');
+
+        $this->addAlias('/about', '/page/1');
+        $this->addAlias('/contacts', '/page/2');
     }
 
     public static function addRoute(
@@ -35,6 +38,10 @@ class Router
             'controller' => $controller,
             'method'     => $method
         );
+    }
+
+    public function addAlias(string $alias, string $url){
+        self::$aliases[$alias] = $url;
     }
 
     /**
@@ -49,6 +56,9 @@ class Router
             $url = rtrim($url, '/?');
         } else {
             $url = rtrim($_SERVER['REQUEST_URI'], '/');
+        }
+        if (isset(self::$aliases[$url])){
+            $url = self::$aliases[$url];
         }
         $lastSymbol = strrchr($url, '/');
         $lastSymbol = str_replace('/', '', $lastSymbol);

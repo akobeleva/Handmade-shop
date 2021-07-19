@@ -20,7 +20,7 @@ class Router
         $this->addRoute('/contacts', SimplePageController::class, 'contactsAction');
         $this->addRoute('/catalog', CatalogController::class, 'showCatalogPage');
         $this->addRoute('/catalog/category', CategoryController::class, 'showCategoryPage');
-        $this->addRoute('/catalog/product', ProductController::class, 'show');
+        $this->addRoute('/catalog/product', ProductController::class, 'showProductPage');
         $this->addRoute("/search", SearchController::class, 'show');
     }
 

@@ -6,8 +6,4 @@ abstract class Controller
 {
     protected $view;
     protected $model;
-
-    public function show($_get)
-    {
-    }
 }

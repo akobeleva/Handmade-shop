@@ -12,7 +12,7 @@ class CatalogController extends Controller
         $this->view = new CatalogView();
     }
 
-    public function show($_get)
+    public function showCatalogPage($_get)
     {
         $categoryController = new CategoryController();
         $categories = $categoryController->getCategories();

@@ -22,19 +22,8 @@ class CategoryController extends Controller
         );
         $vars['leftMenuItems'] = $subcategories;
         $productController = new ProductController();
-        if (isset($_get['subcategory'])) {
-            $title = $subCatController->getSubcategoryById(
-                $_get['subcategory']
-            );
-            $products = $productController->getProductsBySubcategoryId(
-                $_get['subcategory']
-            );
-        } else {
-            $title = $this->getCategoryById($_get['id']);
-            $products = $productController->getProductsByCategoryId(
-                $_get['id']
-            );
-        }
+        $title = $this->getCategoryById($_get['id']);
+        $products = $productController->getProductsByCategoryId($_get['id']);
         $vars['title'] = $title[0]['name'];
         $vars['catalogItems'] = $products;
         $this->view->renderCategoryPage($vars);

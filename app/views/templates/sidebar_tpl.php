@@ -5,12 +5,10 @@
             if (isset($leftMenuItems)): ?>
                 <div class="list-group">
                     <?php
-                    foreach ($leftMenuItems as $item): ?>
-                        <a href="/catalog/category/?id=<?php
-                        echo $item['category_id'] ?>&subcategory=<?php
-                        echo $item['id'] ?>" class="list-group-item"><?php
-                            echo $item['name'] ?></a>
-                    <?php
+                    foreach ($leftMenuItems as $item):
+                        if (isset($item['link'])):?>
+                            <a href = "<?php echo $item['link'];?>" class="list-group-item"><?php echo $item['name'] ?></a>
+                    <?php endif;
                     endforeach; ?>
                 </div>
             <?php

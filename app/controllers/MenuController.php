@@ -16,6 +16,10 @@ class MenuController extends Controller
     {
         $categoryController = new CategoryController();
         $categories = $categoryController->getCategories();
+        if (!isset($categories)){
+            $this->showNotFoundPage();
+            return;
+        }
         $vars['menuItems'] = $categories;
         $this->view->renderMenu($vars);
     }

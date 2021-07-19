@@ -18,6 +18,10 @@ class ProductController extends Controller
     {
         $productController = new ProductController();
         $product = $productController->getProductById($id);
+        if (!isset($product)){
+            $this->showNotFoundPage();
+            return;
+        }
         $vars['product'] = $product[0];
         $this->view->renderProductPage($vars);
     }

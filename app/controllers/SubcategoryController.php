@@ -17,11 +17,23 @@ class SubcategoryController extends Controller
     public function showSubcategoryPage($id)
     {
         $subcategory = $this->getSubcategoryById($id);
+        if (!isset($subcategory)){
+            $this->showNotFoundPage();
+            return;
+        }
         $subcategories = $this->getSubcategoriesByCategoryId($subcategory[0]['category_id']);
+        if (!isset($subcategories)){
+            $this->showNotFoundPage();
+            return;
+        }
         $vars['leftMenuItems'] = $subcategories;
         $productController = new ProductController();
         $title = $subcategory[0]['name'];
         $products = $productController->getProductsBySubcategoryId($id);
+        if (!isset($products)){
+            $this->showNotFoundPage();
+            return;
+        }
         $vars['title'] = $title;
         $vars['catalogItems'] = $products;
         $this->view->renderCategoryPage($vars);

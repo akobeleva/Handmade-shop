@@ -21,6 +21,10 @@ class StaticPageController extends Controller
 
     public function showStaticPage($id){
         $staticPage = $this->model->getStaticPageById($id);
+        if (!isset($staticPage)){
+            $this->showNotFoundPage();
+            return;
+        }
         $vars['title'] = $staticPage[0]['title'];
         $vars['text'] = $staticPage[0]['text'];
         $this->view->renderStaticPage($vars);

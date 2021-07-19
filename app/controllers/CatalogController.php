@@ -16,6 +16,10 @@ class CatalogController extends Controller
     {
         $categoryController = new CategoryController();
         $categories = $categoryController->getCategories();
+        if (!isset($categories)) {
+            $this->showNotFoundPage();
+            return;
+        }
         $vars['catalogItems'] = $categories;
         $this->view->renderCatalogPage($vars);
     }

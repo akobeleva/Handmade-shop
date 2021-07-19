@@ -50,11 +50,21 @@ class Router
         } else {
             $url = rtrim($_SERVER['REQUEST_URI'], '/');
         }
+        $lastSymbol = strrchr($url, '/');
+        $lastSymbol = str_replace('/', '', $lastSymbol);
+        if (is_numeric($lastSymbol)) {
+            $url = rtrim($url, '/' . $lastSymbol);
+            $param = $lastSymbol;
+        }
         if (isset(self::$routes[$url])) {
             $controllerName = self::$routes[$url]['controller'];
             $controller = new $controllerName();
             $methodName = self::$routes[$url]['method'];
-            $controller->$methodName($_GET);
+            if (isset($param)) {
+                $controller->$methodName($param);
+            } else {
+                $controller->$methodName();
+            }
         } else {
             http_response_code(404);
             include '../app/views/404.html';

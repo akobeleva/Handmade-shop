@@ -14,16 +14,16 @@ class CategoryController extends Controller
         $this->model = new CategoryModel();
     }
 
-    public function showCategoryPage($_get)
+    public function showCategoryPage($id)
     {
         $subCatController = new SubcategoryController();
         $subcategories = $subCatController->getSubcategoriesByCategoryId(
-            $_get['id']
+            $id
         );
         $vars['leftMenuItems'] = $subcategories;
         $productController = new ProductController();
-        $title = $this->getCategoryById($_get['id']);
-        $products = $productController->getProductsByCategoryId($_get['id']);
+        $title = $this->getCategoryById($id);
+        $products = $productController->getProductsByCategoryId($id);
         $vars['title'] = $title[0]['name'];
         $vars['catalogItems'] = $products;
         $this->view->renderCategoryPage($vars);

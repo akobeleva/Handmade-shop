@@ -14,10 +14,10 @@ class ProductController extends Controller
         $this->model = new ProductModel();
     }
 
-    public function showProductPage($_get)
+    public function showProductPage($id)
     {
         $productController = new ProductController();
-        $product = $productController->getProductById($_get['id']);
+        $product = $productController->getProductById($id);
         $vars['product'] = $product[0];
         $this->view->renderProductPage($vars);
     }

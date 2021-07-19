@@ -4,12 +4,12 @@ namespace app\models;
 
 use core\Model;
 
-class SimplePageModel extends Model
+class StaticPageModel extends Model
 {
     public function __construct()
     {
         parent::__construct();
-        $this->table = 'simple_content_pages';
+        $this->table = 'static_pages';
     }
 
     public function getTextByTitle($title): array

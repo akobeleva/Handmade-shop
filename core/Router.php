@@ -17,7 +17,7 @@ class Router
 
     public function __construct()
     {
-        $this->addRoute('', StaticPageController::class, 'show');
+        $this->addRoute('', StaticPageController::class, 'showMainPage');
         $this->addRoute('/page', StaticPageController::class, 'showStaticPage');
         $this->addRoute('/catalog', CatalogController::class, 'showCatalogPage');
         $this->addRoute('/catalog/category', CategoryController::class, 'showCategoryPage');

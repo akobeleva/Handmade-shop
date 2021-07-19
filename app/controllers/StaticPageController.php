@@ -14,9 +14,9 @@ class StaticPageController extends Controller
         $this->model = new StaticPageModel();
     }
 
-    public function show($_get)
+    public function showMainPage()
     {
-        $this->view->render(['title' => 'MAIN']);
+        $this->view->renderStaticPage(['title' => 'MAIN']);
     }
 
     public function showStaticPage($id){

@@ -22,6 +22,8 @@ class PageView extends View
     {
         if (isset($vars['catalogItems'])) {
             $catalogView = new CatalogView();
+            $vars['link'] = '/catalog/category';
+            $vars['columnWidth'] = 3;
             $text = $catalogView->renderCatalogView($vars);
             $vars['title'] = 'Каталог';
             $vars['text'] = $text;

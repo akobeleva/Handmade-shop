@@ -10,11 +10,13 @@ class  CatalogView extends View
     {
         foreach ($vars['catalogItems'] as &$item) {
             $cardView = new CardView();
-            $item['link'] = '/catalog/category';
+            $item['link'] = $vars['link'];
+            if (isset($vars['additionalClass'])){
+                $item['additionalClass'] = $vars['additionalClass'];
+            }
             $item['cardBody'] = $cardView->renderBody($item);
             $item['card'] = $cardView->renderCard($item);
         }
-        $vars['columnWidth'] = 3;
         return $this->renderTemplate('catalog_tpl.php', $vars);
     }
 }

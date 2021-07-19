@@ -1,7 +1,7 @@
 <div class="card-body">
     <?php
         if (isset($link)): ?>
-        <a href="<?php echo $link; ?>/?id=<?php if (isset($id)) echo $id;?>" class="grey-text text-center">
+        <a href="<?php echo $link; ?>/<?php if (isset($id)) echo $id;?>" class="grey-text text-center">
             <?php if (isset($name)): ?>
             <h5><?php echo $name; ?></h5>
             <?php endif; ?>

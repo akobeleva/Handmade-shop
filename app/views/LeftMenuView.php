@@ -10,7 +10,7 @@ class LeftMenuView extends View
     {
         $leftMenu = $this->renderTemplate('left_menu_tpl.php', $vars);
         $vars['text'] = $leftMenu;
-        $pageContentView = new PageContentView();
+        $pageContentView = new PageView();
         $pageContentView->render($vars);
     }
 }

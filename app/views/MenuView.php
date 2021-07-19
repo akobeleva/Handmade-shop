@@ -6,7 +6,7 @@ use core\View;
 
 class MenuView extends View
 {
-    public function render($vars = [])
+    public function renderMenu($vars = [])
     {
         echo $this->renderTemplate('menu_tpl.php', $vars);
     }

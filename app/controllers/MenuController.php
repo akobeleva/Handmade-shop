@@ -17,6 +17,6 @@ class MenuController extends Controller
         $categoryController = new CategoryController();
         $categories = $categoryController->getCategories();
         $vars['menuItems'] = $categories;
-        $this->view->render($vars);
+        $this->view->renderMenu($vars);
     }
 }

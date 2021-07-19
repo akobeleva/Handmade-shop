@@ -12,9 +12,9 @@ class StaticPageModel extends Model
         $this->table = 'static_pages';
     }
 
-    public function getTextByTitle($title): array
+    public function getStaticPageById($id): array
     {
-        $sql = "SELECT text FROM $this->table WHERE title = '" . $title . "'";
+        $sql = "SELECT * FROM $this->table WHERE id = " . $id;
         return $this->db->executeQuery($sql);
     }
 }

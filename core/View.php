@@ -20,7 +20,7 @@ abstract class View
         return ob_get_clean();
     }
 
-    public function render($vars = [])
-    {
+    public function renderNotFoundPage(){
+        require '../app/views/404.html';
     }
 }

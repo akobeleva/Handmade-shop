@@ -37,4 +37,8 @@ class PageView extends View
         $vars['text'] = $text;
         $this->renderPageContent($vars);
     }
+
+    public function renderStaticPage($vars =[]){
+        $this->renderPageContent($vars);
+    }
 }

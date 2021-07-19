@@ -4,9 +4,9 @@ namespace app\views;
 
 use core\View;
 
-class CatalogView extends View
+class  CatalogView extends View
 {
-    public function render($vars = [])
+    public function renderCatalogView($vars = [])
     {
         foreach ($vars['catalogItems'] as &$item) {
             $cardView = new CardView();
@@ -15,10 +15,6 @@ class CatalogView extends View
             $item['card'] = $cardView->renderCard($item);
         }
         $vars['columnWidth'] = 3;
-        $catalog = $this->renderTemplate('catalog_tpl.php', $vars);
-        $vars['text'] = $catalog;
-        $vars['title'] = 'Каталог';
-        $pageContentView = new PageContentView();
-        $pageContentView->render($vars);
+        return $this->renderTemplate('catalog_tpl.php', $vars);
     }
 }

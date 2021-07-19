@@ -6,6 +6,10 @@ use core\Model;
 
 class StaticPageModel extends Model
 {
+    public $id;
+    public $title;
+    public $text;
+
     public function __construct()
     {
         parent::__construct();

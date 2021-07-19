@@ -6,6 +6,14 @@ use core\Model;
 
 class ProductModel extends Model
 {
+    public $id;
+    public $subcategory_id;
+    public $name;
+    public $price;
+    public $description;
+    public $seller_id;
+    public $image_name;
+
     public function __construct()
     {
         parent::__construct();

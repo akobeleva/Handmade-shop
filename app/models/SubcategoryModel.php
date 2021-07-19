@@ -6,6 +6,10 @@ use core\Model;
 
 class SubcategoryModel extends Model
 {
+    public $id;
+    public $category_id;
+    public $name;
+
     public function __construct()
     {
         parent::__construct();

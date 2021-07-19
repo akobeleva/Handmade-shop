@@ -6,6 +6,11 @@ use core\Model;
 
 class CategoryModel extends Model
 {
+    public $id;
+    public $name;
+    public $image_name;
+    public $weight;
+
     public function __construct()
     {
         parent::__construct();

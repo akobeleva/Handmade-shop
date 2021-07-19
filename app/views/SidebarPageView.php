@@ -13,8 +13,7 @@ class SidebarPageView extends PageView
         $rightContent = $catalogView->renderCatalogView($vars);
         $vars['rightContent'] = $rightContent;
         foreach ($vars['leftMenuItems'] as &$item) {
-            $item['link'] = "/catalog/category/?id=" . $item['category_id']
-                . "&subcategory=" . $item['id'];
+            $item['link'] = "/catalog/subcategory/?id=" . $item['id'];
         }
         $text = $this->renderTemplate('sidebar_tpl.php', $vars);
         $vars['text'] = $text;

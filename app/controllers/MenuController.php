@@ -12,7 +12,7 @@ class MenuController extends Controller
         $this->view = new MenuView();
     }
 
-    public function show($_get)
+    public function showMenu()
     {
         $categoryController = new CategoryController();
         $categories = $categoryController->getCategories();

@@ -5,39 +5,38 @@ namespace app\controllers;
 use app\models\ProductModel;
 use app\views\PageView;
 use core\Controller;
+use core\Model;
 
 class ProductController extends Controller
 {
     public function __construct()
     {
         $this->view = new PageView();
-        $this->model = new ProductModel();
     }
 
     public function showProductPage($id)
     {
-        $productController = new ProductController();
-        $product = $productController->getProductById($id);
+        $product = $this->getProductById($id);
         if (!isset($product)){
             $this->showNotFoundPage();
             return;
         }
-        $vars['product'] = $product[0];
+        $vars['product']['entity'] = $product;
         $this->view->renderProductPage($vars);
     }
 
     public function getProductsByCategoryId($categoryId): array
     {
-        return $this->model->getProductsByCategoryId($categoryId);
+        return ProductModel::getProductsByCategoryId($categoryId);
     }
 
     public function getProductsBySubcategoryId($subcategoryId): array
     {
-        return $this->model->getProductsBySubcategoryId($subcategoryId);
+        return ProductModel::getProductsBySubcategoryId($subcategoryId);
     }
 
-    public function getProductById($productId): array
+    public function getProductById($productId): Model
     {
-        return $this->model->getRowById($productId);
+        return ProductModel::getById($productId);
     }
 }

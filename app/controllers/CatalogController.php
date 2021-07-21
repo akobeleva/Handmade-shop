@@ -20,7 +20,11 @@ class CatalogController extends Controller
             $this->showNotFoundPage();
             return;
         }
-        $vars['catalogItems'] = $categories;
+        $catalogItems = [];
+        foreach ($categories as $category) {
+            $catalogItems[$category->getId()]['entity'] = $category;
+        }
+        $vars['catalogItems'] = $catalogItems;
         $this->view->renderCatalogPage($vars);
     }
 }

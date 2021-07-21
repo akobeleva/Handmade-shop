@@ -5,13 +5,13 @@ namespace app\controllers;
 use app\models\CategoryModel;
 use app\views\SidebarPageView;
 use core\Controller;
+use core\Model;
 
 class CategoryController extends Controller
 {
     public function __construct()
     {
         $this->view = new SidebarPageView();
-        $this->model = new CategoryModel();
     }
 
     public function showCategoryPage($id)
@@ -22,30 +22,38 @@ class CategoryController extends Controller
             $this->showNotFoundPage();
             return;
         }
-        $vars['leftMenuItems'] = $subcategories;
-        $productController = new ProductController();
+        $leftMenuItems = [];
+        foreach ($subcategories as $subcategory) {
+            $leftMenuItems[$subcategory->getId()]['entity'] = $subcategory;
+        }
+        $vars['leftMenuItems'] = $leftMenuItems;
         $category = $this->getCategoryById($id);
         if (!isset($category)){
             $this->showNotFoundPage();
             return;
         }
+        $vars['title'] = $category->getName();
+        $productController = new ProductController();
         $products = $productController->getProductsByCategoryId($id);
         if (!isset($products)){
             $this->showNotFoundPage();
             return;
         }
-        $vars['title'] = $category[0]['name'];
-        $vars['catalogItems'] = $products;
+        $catalogItems = [];
+        foreach ($products as $product) {
+            $catalogItems[$product->getId()]['entity'] = $product;
+        }
+        $vars['catalogItems'] = $catalogItems;
         $this->view->renderCategoryPage($vars);
     }
 
     public function getCategories(): array
     {
-        return $this->model->getCategoriesByWeight();
+        return CategoryModel::getAll();
     }
 
-    public function getCategoryById($id): array
+    public function getCategoryById($id): Model
     {
-        return $this->model->getRowById($id);
+        return CategoryModel::getById($id);
     }
 }

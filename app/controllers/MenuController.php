@@ -20,7 +20,11 @@ class MenuController extends Controller
             $this->showNotFoundPage();
             return;
         }
-        $vars['menuItems'] = $categories;
+        $menuItems = [];
+        foreach ($categories as $category){
+            $menuItems[$category->getId()]['entity'] = $category;
+        }
+        $vars['menuItems'] = $menuItems;
         $this->view->renderMenu($vars);
     }
 }

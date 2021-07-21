@@ -5,47 +5,59 @@ namespace app\controllers;
 use app\models\SubcategoryModel;
 use app\views\SidebarPageView;
 use core\Controller;
+use core\Model;
 
 class SubcategoryController extends Controller
 {
     public function __construct()
     {
         $this->view = new SidebarPageView();
-        $this->model = new SubcategoryModel();
     }
 
     public function showSubcategoryPage($id)
     {
         $subcategory = $this->getSubcategoryById($id);
-        if (!isset($subcategory)){
+        if (!isset($subcategory)) {
             $this->showNotFoundPage();
             return;
         }
-        $subcategories = $this->getSubcategoriesByCategoryId($subcategory[0]['category_id']);
-        if (!isset($subcategories)){
+        $vars['title'] = $subcategory->getName();
+        $subcategories = $this->getRelatedSubcategories($subcategory);
+        if (!isset($subcategories)) {
             $this->showNotFoundPage();
             return;
         }
-        $vars['leftMenuItems'] = $subcategories;
+        $leftMenuItems = [];
+        foreach ($subcategories as $subcategory) {
+            $leftMenuItems[$subcategory->getId()]['entity'] = $subcategory;
+        }
+        $vars['leftMenuItems'] = $leftMenuItems;
         $productController = new ProductController();
-        $title = $subcategory[0]['name'];
         $products = $productController->getProductsBySubcategoryId($id);
-        if (!isset($products)){
+        if (!isset($products)) {
             $this->showNotFoundPage();
             return;
         }
-        $vars['title'] = $title;
-        $vars['catalogItems'] = $products;
+        $catalogItems = [];
+        foreach ($products as $product) {
+            $catalogItems[$product->getId()]['entity'] = $product;
+        }
+        $vars['catalogItems'] = $catalogItems;
         $this->view->renderCategoryPage($vars);
     }
 
     public function getSubcategoriesByCategoryId($categoryId): array
     {
-        return $this->model->getSubcategoryByCategoryId($categoryId);
+        return SubcategoryModel::getSubcategoryByCategoryId($categoryId);
     }
 
-    public function getSubcategoryById($subcategoryId): array
+    public function getSubcategoryById($subcategoryId): Model
     {
-        return $this->model->getRowById($subcategoryId);
+        return SubcategoryModel::getById($subcategoryId);
+    }
+
+    public function getRelatedSubcategories($subcategory): array
+    {
+        return $this->getSubcategoriesByCategoryId($subcategory->getCategoryId());
     }
 }

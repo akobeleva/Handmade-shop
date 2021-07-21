@@ -11,7 +11,6 @@ class StaticPageController extends Controller
     public function __construct()
     {
         $this->view = new PageView();
-        $this->model = new StaticPageModel();
     }
 
     public function showMainPage()
@@ -19,14 +18,15 @@ class StaticPageController extends Controller
         $this->view->renderStaticPage(['title' => 'MAIN']);
     }
 
-    public function showStaticPage($id){
-        $staticPage = $this->model->getStaticPageById($id);
-        if (!isset($staticPage)){
+    public function showStaticPage($id)
+    {
+        $staticPage = StaticPageModel::getById($id);
+        if (!isset($staticPage)) {
             $this->showNotFoundPage();
             return;
         }
-        $vars['title'] = $staticPage[0]['title'];
-        $vars['text'] = $staticPage[0]['text'];
-        $this->view->renderStaticPage($vars);
+        $vars['title'] = $staticPage->getTitle();
+        $vars['text'] = $staticPage->getText();
+        $this->view->renderPa($vars);
     }
 }

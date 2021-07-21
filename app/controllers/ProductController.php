@@ -3,7 +3,7 @@
 namespace app\controllers;
 
 use app\models\ProductModel;
-use app\views\PageView;
+use app\views\ProductPageView;
 use core\Controller;
 use core\Model;
 
@@ -11,7 +11,7 @@ class ProductController extends Controller
 {
     public function __construct()
     {
-        $this->view = new PageView();
+        $this->view = new ProductPageView();
     }
 
     public function showProductPage($id)
@@ -22,7 +22,7 @@ class ProductController extends Controller
             return;
         }
         $vars['product']['entity'] = $product;
-        $this->view->renderProductPage($vars);
+        $this->view->renderPageContent($vars);
     }
 
     public function getProductsByCategoryId($categoryId): array

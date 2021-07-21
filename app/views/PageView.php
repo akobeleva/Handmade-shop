@@ -13,7 +13,7 @@ class PageView extends View
         $this->printPage($vars);
     }
 
-    private function printPage($vars = [])
+    protected function printPage($vars = [])
     {
         echo $this->renderTemplate('main_tpl.php', $vars);
     }
@@ -29,14 +29,6 @@ class PageView extends View
             $vars['text'] = $text;
             $this->renderPageContent($vars);
         }
-    }
-
-    public function renderProductPage($vars = [])
-    {
-        $productView = new ProductView();
-        $text = $productView->renderProductView($vars);
-        $vars['text'] = $text;
-        $this->renderPageContent($vars);
     }
 
     public function renderNotFoundPage()

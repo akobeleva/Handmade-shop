@@ -7,7 +7,7 @@
                     <?php
                     foreach ($leftMenuItems as $item):
                         if (isset($item['link'])):?>
-                            <a href = "<?php echo $item['link'];?>" class="list-group-item"><?php echo $item['name'] ?></a>
+                            <a href = "<?php echo $item['link'];?>" class="list-group-item"><?php if (isset($item['entity'])) echo $item['entity']->getName() ?></a>
                     <?php endif;
                     endforeach; ?>
                 </div>

@@ -1,9 +1,9 @@
 <div class="card-body">
     <?php
         if (isset($link)): ?>
-        <a href="<?php echo $link; ?>/<?php if (isset($id)) echo $id;?>" class="grey-text text-center">
-            <?php if (isset($name)): ?>
-            <h5><?php echo $name; ?></h5>
+        <a href="<?php echo $link; ?>/<?php if (isset($entity)) echo $entity->getId();?>" class="grey-text text-center">
+            <?php if (isset($entity)): ?>
+            <h5><?php echo $entity->getName(); ?></h5>
             <?php endif; ?>
         </a>
     <?php

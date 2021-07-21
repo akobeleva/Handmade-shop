@@ -41,4 +41,11 @@ class PageView extends View
     public function renderStaticPage($vars =[]){
         $this->renderPageContent($vars);
     }
+
+    public function renderNotFoundPage()
+    {
+        $vars = [];
+        $vars['text'] = $this->renderTemplate('404.html', $vars);
+        $this->renderPageContent($vars);
+    }
 }

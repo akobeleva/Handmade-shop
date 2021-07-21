@@ -6,23 +6,37 @@ use database\DB;
 
 abstract class Model
 {
-    protected $db;
-    protected $table;
+    protected static $db;
+    protected static $table;
 
-    public function __construct()
+    public static function getAll(): array
     {
-        $this->db = DB::getInstance();
+        self::checkDB();
+        $sql = "SELECT * FROM " . static::$table;
+        $rows = static::$db->executeQuery($sql);
+        return static::rowsToEntities($rows);
     }
 
-    public function getAllRows(): array
+    public static function getById($id): Model
     {
-        $sql = "SELECT * FROM $this->table";
-        return $this->db->executeQuery($sql);
+        self::checkDB();
+        $sql = "SELECT * FROM " . static::$table . " WHERE id = " . $id;
+        $rows = static::$db->executeQuery($sql);
+        return static::rowToEntity($rows[0]);
     }
 
-    public function getRowById($id): array
+    protected static function checkDB()
     {
-        $sql = "SELECT * FROM $this->table WHERE id = " . $id;
-        return $this->db->executeQuery($sql);
+        if (static::$db === null) {
+            static::$db = DB::getInstance();
+        }
+    }
+
+    protected static function rowsToEntities($rows): array
+    {
+    }
+
+    protected static function rowToEntity($row): Model
+    {
     }
 }

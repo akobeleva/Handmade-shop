@@ -6,19 +6,61 @@ use core\Model;
 
 class SubcategoryModel extends Model
 {
-    public $id;
-    public $category_id;
-    public $name;
+    private $id;
+    private $category_id;
+    private $name;
 
-    public function __construct()
+    protected static $table = 'subcategory';
+    protected static $db;
+
+    public function __construct($id, $category_id, $name)
     {
-        parent::__construct();
-        $this->table = 'subcategory';
+        $this->id = $id;
+        $this->category_id = $category_id;
+        $this->name = $name;
     }
 
-    public function getSubcategoryByCategoryId($categoryId): array
+    public function getId()
     {
-        $sql = "SELECT * FROM $this->table WHERE category_id = " . $categoryId;
-        return $this->db->executeQuery($sql);
+        return $this->id;
     }
+
+    public function getCategoryId()
+    {
+        return $this->category_id;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public static function getSubcategoryByCategoryId($categoryId): array
+    {
+        self::checkDB();
+        $sql = "SELECT * FROM " . self::$table . " WHERE category_id = "
+            . $categoryId;
+        $rows = static::$db->executeQuery($sql);
+        return self::rowsToEntities($rows);
+    }
+
+    protected static function rowsToEntities($rows): array
+    {
+        $subcategories = [];
+        foreach ($rows as $row) {
+            $subcategories[$row['id']] = self::rowToEntity($row);
+        }
+        return $subcategories;
+    }
+
+    protected static function rowToEntity($row): Model
+    {
+        return new SubcategoryModel(
+            $row['id'],
+            $row['category_id'],
+            $row['name']
+        );
+    }
+
+
 }

@@ -4,9 +4,9 @@ namespace app\views;
 
 use core\View;
 
-class  CatalogView extends View
+class  CatalogTableView extends View
 {
-    public function renderCatalogView($vars = [])
+    public function renderCatalogTableView($vars = [])
     {
         foreach ($vars['catalogItems'] as &$item) {
             $cardView = new CardView();

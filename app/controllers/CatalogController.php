@@ -2,14 +2,14 @@
 
 namespace app\controllers;
 
-use app\views\PageView;
+use app\views\pages\CatalogPageView;
 use core\Controller;
 
 class CatalogController extends Controller
 {
     public function __construct()
     {
-        $this->view = new PageView();
+        $this->view = new CatalogPageView();
     }
 
     public function showCatalogPage()

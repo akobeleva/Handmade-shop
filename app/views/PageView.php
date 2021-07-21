@@ -18,19 +18,6 @@ class PageView extends View
         echo $this->renderTemplate('main_tpl.php', $vars);
     }
 
-    public function renderCatalogPage($vars = [])
-    {
-        if (isset($vars['catalogItems'])) {
-            $catalogView = new CatalogView();
-            $vars['link'] = '/catalog/category';
-            $vars['columnWidth'] = 3;
-            $text = $catalogView->renderCatalogView($vars);
-            $vars['title'] = 'Каталог';
-            $vars['text'] = $text;
-            $this->renderPageContent($vars);
-        }
-    }
-
     public function renderNotFoundPage()
     {
         $vars = [];

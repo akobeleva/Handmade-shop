@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use app\models\StaticPageModel;
 use core\Controller;
-use app\views\PageView;
+use app\views\pages\PageView;
 
 class StaticPageController extends Controller
 {

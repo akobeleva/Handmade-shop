@@ -1,6 +1,6 @@
 <?php
 
-namespace app\views;
+namespace app\views\pages;
 
 class ProductPageView extends PageView
 {

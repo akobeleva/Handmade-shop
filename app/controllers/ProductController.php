@@ -3,7 +3,7 @@
 namespace app\controllers;
 
 use app\models\ProductModel;
-use app\views\ProductPageView;
+use app\views\pages\ProductPageView;
 use core\Controller;
 use core\Model;
 

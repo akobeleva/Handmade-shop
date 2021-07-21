@@ -3,7 +3,7 @@
 namespace app\controllers;
 
 use app\models\CategoryModel;
-use app\views\SidebarPageView;
+use app\views\pages\SidebarPageView;
 use core\Controller;
 use core\Model;
 

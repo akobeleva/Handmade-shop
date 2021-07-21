@@ -6,7 +6,7 @@ use core\View;
 
 class PageView extends View
 {
-    protected function renderPageContent($vars = [])
+    public function renderPageContent($vars = [])
     {
         $content = $this->renderTemplate('content_tpl.php', $vars);
         $vars['content'] = $content;
@@ -36,11 +36,6 @@ class PageView extends View
         $productView = new ProductView();
         $text = $productView->renderProductView($vars);
         $vars['text'] = $text;
-        $this->renderPageContent($vars);
-    }
-
-    public function renderStaticPage($vars = [])
-    {
         $this->renderPageContent($vars);
     }
 

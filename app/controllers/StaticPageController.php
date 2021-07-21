@@ -15,7 +15,7 @@ class StaticPageController extends Controller
 
     public function showMainPage()
     {
-        $this->view->renderStaticPage(['title' => 'MAIN']);
+        $this->view->renderPageContent(['title' => 'MAIN']);
     }
 
     public function showStaticPage($id)
@@ -27,6 +27,6 @@ class StaticPageController extends Controller
         }
         $vars['title'] = $staticPage->getTitle();
         $vars['text'] = $staticPage->getText();
-        $this->view->renderPa($vars);
+        $this->view->renderPageContent($vars);
     }
 }

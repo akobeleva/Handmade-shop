@@ -110,6 +110,4 @@ class ProductModel extends Model
             $row['image_name']
         );
     }
-
-
 }

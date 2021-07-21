@@ -31,14 +31,16 @@ class PageView extends View
         }
     }
 
-    public function renderProductPage($vars = []){
-        $productView =  new ProductView();
+    public function renderProductPage($vars = [])
+    {
+        $productView = new ProductView();
         $text = $productView->renderProductView($vars);
         $vars['text'] = $text;
         $this->renderPageContent($vars);
     }
 
-    public function renderStaticPage($vars =[]){
+    public function renderStaticPage($vars = [])
+    {
         $this->renderPageContent($vars);
     }
 

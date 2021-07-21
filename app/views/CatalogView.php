@@ -11,7 +11,7 @@ class  CatalogView extends View
         foreach ($vars['catalogItems'] as &$item) {
             $cardView = new CardView();
             $item['link'] = $vars['link'];
-            if (isset($vars['additionalClass'])){
+            if (isset($vars['additionalClass'])) {
                 $item['additionalClass'] = $vars['additionalClass'];
             }
             $item['cardBody'] = $cardView->renderBody($item);

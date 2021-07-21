@@ -52,6 +52,4 @@ class StaticPageModel extends Model
             $row['text']
         );
     }
-
-
 }

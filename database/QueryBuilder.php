@@ -26,6 +26,14 @@ class QueryBuilder
         $this->queryType = $type;
     }
 
+    private function setJoinTable($type, $table)
+    {
+        $this->joinTables[] = [
+            'type'  => $type,
+            'table' => $table,
+        ];
+    }
+
     public function update()
     {
         $this->setQueryType("update");
@@ -57,14 +65,16 @@ class QueryBuilder
         return $this;
     }
 
-    public function from($tableName): QueryBuilder
+    public function from($table): QueryBuilder
     {
-        $this->table = $tableName;
+        $this->table = $table;
         return $this;
     }
 
-    public function join($tableName)
+    public function join($table): QueryBuilder
     {
+        $this->setJoinTable('INNER JOIN', $table);
+        return $this;
     }
 
     public function orderBy($columns): QueryBuilder
@@ -103,10 +113,17 @@ class QueryBuilder
                     $queryString = $queryString . $column . " ";
                 }
                 $queryString = $queryString . " FROM " . $this->table;
-
-                foreach ($this->whereConditions as $condition) {
-                    $queryString = $queryString . " WHERE "
-                        . $condition['condition'];
+                if (count($this->joinTables) > 0) {
+                    foreach ($this->joinTables as $joinTable) {
+                        $queryString = $queryString . ' ' . $joinTable['type']
+                            . ' ' . $joinTable['table'];
+                    }
+                }
+                if (count($this->whereConditions) > 0) {
+                    foreach ($this->whereConditions as $condition) {
+                        $queryString = $queryString . " WHERE "
+                            . $condition['condition'];
+                    }
                 }
                 if (count($this->groupByColumns) > 0) {
                     foreach ($this->groupByColumns as $groupByColumn) {

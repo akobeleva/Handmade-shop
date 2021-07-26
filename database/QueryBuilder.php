@@ -47,21 +47,41 @@ class QueryBuilder
         return $this;
     }
 
-    public function where($column, $value, $operator = "="): QueryBuilder
-    {
-        $condition = $column . $operator . $value;
+    private function setWhereCondition(
+        $column,
+        $value,
+        $operator,
+        $whereOperator = null
+    ) {
+        if ($operator == 'LIKE') {
+            $condition = $whereOperator . ' ' . $column . ' ' . $operator . ' '
+                . "'%" . $value . "%'";
+        } elseif ($operator == "IN") {
+            $condition = $whereOperator . ' ' . $column . ' ' . $operator
+                . ' (' . $value . ')';
+        } else {
+            $condition = $whereOperator . ' ' . $column . $operator . $value;
+        }
         $this->whereConditions[] = [
             'condition' => $condition,
         ];
+    }
+
+    public function where($column, $value, $operator = "="): QueryBuilder
+    {
+        $this->setWhereCondition($column, $value, $operator);
         return $this;
     }
 
     public function whereIn($column, QueryBuilder $subQuery): QueryBuilder
     {
-        $condition = $column . ' IN (' . $subQuery->getQueryString() . ')';
-        $this->whereConditions[] = [
-            'condition' => $condition,
-        ];
+        $this->setWhereCondition($column, $subQuery->getQueryString(), 'IN');
+        return $this;
+    }
+
+    public function whereOr($column, $value, $operator): QueryBuilder
+    {
+        $this->setWhereCondition($column, $value, $operator, 'OR');
         return $this;
     }
 
@@ -120,9 +140,9 @@ class QueryBuilder
                     }
                 }
                 if (count($this->whereConditions) > 0) {
+                    $queryString = $queryString . " WHERE ";
                     foreach ($this->whereConditions as $condition) {
-                        $queryString = $queryString . " WHERE "
-                            . $condition['condition'];
+                        $queryString = $queryString . $condition['condition'];
                     }
                 }
                 if (count($this->groupByColumns) > 0) {

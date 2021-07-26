@@ -12,6 +12,14 @@ class QueryBuilder
     private $groupByColumns = [];
     private $orderByColumns = [];
     private $limit;
+    private static $db;
+
+    public function __construct()
+    {
+        if (static::$db === null) {
+            static::$db = DB::getInstance();
+        }
+    }
 
     private function setQueryType(string $type)
     {
@@ -27,7 +35,7 @@ class QueryBuilder
     {
         $this->setQueryType("select");
         $arrayColumns = explode(",", $columns);
-        $this->columns = array_merge($columns, $arrayColumns);
+        $this->columns = array_merge($this->columns, $arrayColumns);
         return $this;
     }
 
@@ -36,9 +44,15 @@ class QueryBuilder
         $condition = $column . $operator . $value;
         $this->whereConditions[] = [
             'condition' => $condition,
-            'column'    => $column,
-            'value'     => $value,
-            'operator'  => $operator,
+        ];
+        return $this;
+    }
+
+    public function whereIn($column, $subQuery): QueryBuilder
+    {
+        $condition = $column . ' IN (' . $subQuery . ')';
+        $this->whereConditions[] = [
+            'condition' => $condition,
         ];
         return $this;
     }
@@ -79,30 +93,43 @@ class QueryBuilder
         return $this;
     }
 
-    public function getQueryString()
+    public function getQueryString(): string
     {
-        switch ($this->queryType){
+        $queryString = '';
+        switch ($this->queryType) {
             case "select":
                 $queryString = "SELECT ";
-                foreach ($this->columns as $column){
+                foreach ($this->columns as $column) {
                     $queryString = $queryString . $column . " ";
                 }
-                $queryString .= $queryString. "FROM " . $this->table;
+                $queryString = $queryString . " FROM " . $this->table;
 
-                foreach ($this->whereConditions as $condition){
-                    $queryString = $queryString . "WHERE " . $condition['condition'];
+                foreach ($this->whereConditions as $condition) {
+                    $queryString = $queryString . " WHERE "
+                        . $condition['condition'];
                 }
-                if (count($this->groupByColumns) > 0){
-                    foreach ($this->groupByColumns as $groupByColumn)
-                    $queryString = $queryString . "GROUP BY " . $groupByColumn;
+                if (count($this->groupByColumns) > 0) {
+                    foreach ($this->groupByColumns as $groupByColumn) {
+                        $queryString = $queryString . " GROUP BY "
+                            . $groupByColumn;
+                    }
                 }
-                if (count($this->orderByColumns)>0){
-                    foreach ($this->orderByColumns as $orderByColumn)
-                        $queryString = $queryString . "ORDER BY " . $orderByColumn;
+                if (count($this->orderByColumns) > 0) {
+                    foreach ($this->orderByColumns as $orderByColumn) {
+                        $queryString = $queryString . " ORDER BY "
+                            . $orderByColumn;
+                    }
                 }
-                if ($this->limit !== null){
-                    $queryString = $queryString . "LIMIT " .$this->limit;
+                if ($this->limit !== null) {
+                    $queryString = $queryString . " LIMIT " . $this->limit;
                 }
         }
+        return $queryString;
+    }
+
+    public function execute(): array
+    {
+        $sql = $this->getQueryString();
+        return self::$db->executeQuery($sql);
     }
 }

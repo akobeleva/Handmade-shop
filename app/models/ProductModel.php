@@ -74,9 +74,15 @@ class ProductModel extends Model
     public static function getProductsByCategoryId($categoryId): array
     {
         $subQueryBuilder = new QueryBuilder();
-        $subQuery = $subQueryBuilder->select('id')->from('subcategory')->where('category_id', $categoryId)->getQueryString();
+        $subQuery = $subQueryBuilder->select('id')->from('subcategory')->where(
+            'category_id',
+            $categoryId
+        );
         $queryBuilder = new QueryBuilder();
-        $rows = $queryBuilder->select()->from(self::$table)->whereIn('subcategory_id', $subQuery)->execute();
+        $rows = $queryBuilder->select()->from(self::$table)->whereIn(
+            'subcategory_id',
+            $subQuery
+        )->execute();
         return self::rowsToEntities($rows);
     }
 
@@ -111,6 +117,4 @@ class ProductModel extends Model
             $row['image_name']
         );
     }
-
-
 }

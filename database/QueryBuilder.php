@@ -56,9 +56,9 @@ class QueryBuilder
         return $this;
     }
 
-    public function whereIn($column, $subQuery): QueryBuilder
+    public function whereIn($column, QueryBuilder $subQuery): QueryBuilder
     {
-        $condition = $column . ' IN (' . $subQuery . ')';
+        $condition = $column . ' IN (' . $subQuery->getQueryString() . ')';
         $this->whereConditions[] = [
             'condition' => $condition,
         ];

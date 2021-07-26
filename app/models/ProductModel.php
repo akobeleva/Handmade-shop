@@ -3,6 +3,7 @@
 namespace app\models;
 
 use core\Model;
+use database\QueryBuilder;
 
 class ProductModel extends Model
 {
@@ -72,20 +73,20 @@ class ProductModel extends Model
 
     public static function getProductsByCategoryId($categoryId): array
     {
-        self::checkDB();
-        $sql = "SELECT * FROM " . self::$table
-            . " WHERE subcategory_id IN ( SELECT id from subcategory where category_id = "
-            . $categoryId . ")";
-        $rows = static::$db->executeQuery($sql);
+        $subQueryBuilder = new QueryBuilder();
+        $subQuery = $subQueryBuilder->select('id')->from('subcategory')->where('category_id', $categoryId)->getQueryString();
+        $queryBuilder = new QueryBuilder();
+        $rows = $queryBuilder->select()->from(self::$table)->whereIn('subcategory_id', $subQuery)->execute();
         return self::rowsToEntities($rows);
     }
 
     public static function getProductsBySubcategoryId($subId): array
     {
-        self::checkDB();
-        $sql = "SELECT * FROM " . self::$table . " WHERE subcategory_id = "
-            . $subId;
-        $rows = static::$db->executeQuery($sql);
+        $queryBuilder = new QueryBuilder();
+        $rows = $queryBuilder->select()->from(self::$table)->where(
+            'subcategory_id',
+            $subId
+        )->execute();
         return self::rowsToEntities($rows);
     }
 
@@ -110,4 +111,6 @@ class ProductModel extends Model
             $row['image_name']
         );
     }
+
+
 }

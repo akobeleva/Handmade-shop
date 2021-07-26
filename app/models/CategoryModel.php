@@ -3,6 +3,7 @@
 namespace app\models;
 
 use core\Model;
+use database\QueryBuilder;
 
 class CategoryModel extends Model
 {
@@ -12,7 +13,6 @@ class CategoryModel extends Model
     private $weight;
 
     protected static $table = 'category';
-    protected static $db;
 
     public function __construct($id, $name, $image_name, $weight)
     {
@@ -42,11 +42,11 @@ class CategoryModel extends Model
         return $this->weight;
     }
 
-    public static function findAll(): array
+    public static function getAll(): array
     {
-        self::checkDB();
-        $sql = "SELECT * FROM " . self::$table . " ORDER BY weight";
-        $rows = static::$db->executeQuery($sql);
+        $queryBuilder = new QueryBuilder();
+        $rows = $queryBuilder->select()->from(self::$table)->orderBy('weight')
+            ->execute();
         return self::rowsToEntities($rows);
     }
 

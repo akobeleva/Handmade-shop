@@ -3,6 +3,7 @@
 namespace app\models;
 
 use core\Model;
+use database\QueryBuilder;
 
 class SubcategoryModel extends Model
 {
@@ -11,7 +12,6 @@ class SubcategoryModel extends Model
     private $name;
 
     protected static $table = 'subcategory';
-    protected static $db;
 
     public function __construct($id, $category_id, $name)
     {
@@ -37,10 +37,11 @@ class SubcategoryModel extends Model
 
     public static function getSubcategoryByCategoryId($categoryId): array
     {
-        self::checkDB();
-        $sql = "SELECT * FROM " . self::$table . " WHERE category_id = "
-            . $categoryId;
-        $rows = static::$db->executeQuery($sql);
+        $queryBuilder = new QueryBuilder();
+        $rows = $queryBuilder->select()->from(self::$table)->where(
+            'category_id',
+            $categoryId
+        )->execute();
         return self::rowsToEntities($rows);
     }
 

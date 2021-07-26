@@ -11,7 +11,6 @@ class StaticPageModel extends Model
     private $text;
 
     protected static $table = 'static_pages';
-    protected static $db;
 
     public function __construct($id, $title, $text)
     {

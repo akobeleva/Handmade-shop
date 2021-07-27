@@ -33,7 +33,7 @@ use app\controllers\MenuController;
         <div class="buttons">
             <a href="/"><img src="/img/shopping-bag.png" alt=""></a>
             <a href="/"><img src="/img/avatar.png" alt=""></a>
-            <a href="/">Sign In</a>
+            <a href="/user/signup">SignUp</a>
         </div>
     </div>
     <nav class="menu">

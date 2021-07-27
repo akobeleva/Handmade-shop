@@ -8,6 +8,7 @@ use app\controllers\ProductController;
 use app\controllers\SearchController;
 use app\controllers\StaticPageController;
 use app\controllers\SubcategoryController;
+use app\controllers\UserController;
 
 
 class Router
@@ -24,6 +25,7 @@ class Router
         $this->addRoute('/catalog/subcategory', SubcategoryController::class, 'showSubcategoryPage');
         $this->addRoute('/catalog/product', ProductController::class, 'showProductPage');
         $this->addRoute("/search", SearchController::class, 'showSearchAnswer');
+        $this->addRoute('/user/signup', UserController::class, 'signup');
 
         $this->addAlias('/about', '/page/1');
         $this->addAlias('/contacts', '/page/2');

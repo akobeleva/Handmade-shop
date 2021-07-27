@@ -117,4 +117,13 @@ class ProductModel extends Model
             $row['image_name']
         );
     }
+
+    public static function search($searchText): array
+    {
+        $queryBuilder = new QueryBuilder();
+        $rows = $queryBuilder->select()->from(self::$table)
+            ->where('name', $searchText, 'LIKE')
+            ->whereOr('description', $searchText, 'LIKE')->execute();
+        return self::rowsToEntities($rows);
+    }
 }

@@ -11,8 +11,8 @@ class CatalogPageView extends PageView
         $catalogView = new CatalogTableView();
         $vars['columnWidth'] = 3;
         $text = $catalogView->renderCatalogTableView($vars);
-        if (isset($vars['query'])) {
-            $vars['title'] = 'Результаты по запросу ' . $vars['query'];
+        if (isset($vars['searchText'])) {
+            $vars['title'] = 'Результаты по запросу ' . $vars['searchText'];
         } else {
             $vars['title'] = 'Каталог';
         }

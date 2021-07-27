@@ -25,7 +25,7 @@ use app\controllers\MenuController;
     <div class="subheader">
         <a href="/" class="logo"><img src="/img/logo.jpg" alt=""></a>
         <form class="d-flex search-from" action="/search/" method="get">
-            <input name="query" class="form-control me-2" type="search"
+            <input name="search_text" class="form-control me-2" type="search"
                    placeholder="Поиск товаров" aria-label="Search">
             <button class="btn btn-outline-secondary" type="submit">
                 <i class="fa fa-search"></i></button>

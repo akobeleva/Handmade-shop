@@ -22,8 +22,9 @@ class SearchController extends Controller
             $catalogItems[$product->getId()]['entity'] = $product;
         }
         $vars['catalogItems'] = $catalogItems;
-        $vars['link'] = 'catalog/product';
+        $vars['link'] = '/catalog/product';
         $vars['query'] = $query;
+        $vars['additionalClass'] = 'product_card';
         $this->view->renderCatalogPage($vars);
     }
 }

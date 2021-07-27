@@ -10,14 +10,14 @@
     endif; ?>
     <div>
         <?php
-        if (isset($price)): ?>
+        if (isset($entity) && isset($additionalClass)): ?>
             <span class="product-price"><?php
-                echo $price . '₽' ?></span>
+                echo $entity->getPrice() . '₽' ?></span>
             <div class="product_buttons text-end">
                 <button type="button" class="btn btn-outline-info btn-circle">
-                    <img src="/img/heart.png" alt=""></button>
+                    <img src="/img/heart.png" alt="" class="rounded mx-auto d-block"></button>
                 <button type="button" class="btn btn-outline-info btn-circle">
-                    <img src="/img/shopping-bag.png" alt=""></button>
+                    <img src="/img/shopping-bag.png" alt="" class="rounded mx-auto d-block"></button>
             </div>
         <?php
         endif; ?>

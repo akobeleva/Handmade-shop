@@ -3,7 +3,7 @@
 namespace app\controllers;
 
 use app\models\CategoryModel;
-use app\views\pages\SidebarPageView;
+use app\views\pages\CategoryPageView;
 use core\Controller;
 use core\Model;
 
@@ -11,7 +11,7 @@ class CategoryController extends Controller
 {
     public function __construct()
     {
-        $this->view = new SidebarPageView();
+        $this->view = new CategoryPageView();
     }
 
     public function showCategoryPage($id)

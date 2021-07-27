@@ -1,3 +1,7 @@
+<?php
+if (isset($title)) : ?>
+    <h1> <?php echo $title; ?></h1>
+<?php endif; ?>
 <div>
     <div class="row">
         <div class="col-md-3">

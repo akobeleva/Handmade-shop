@@ -25,6 +25,7 @@ class CatalogController extends Controller
             $catalogItems[$category->getId()]['entity'] = $category;
         }
         $vars['catalogItems'] = $catalogItems;
+        $vars['link'] = 'catalog/category';
         $this->view->renderCatalogPage($vars);
     }
 }

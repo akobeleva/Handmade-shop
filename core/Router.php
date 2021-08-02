@@ -2,6 +2,7 @@
 
 namespace core;
 
+use app\controllers\AdminController;
 use app\controllers\CatalogController;
 use app\controllers\CategoryController;
 use app\controllers\ProductController;
@@ -26,12 +27,13 @@ class Router
         $this->addRoute('/catalog/product', ProductController::class, 'showProductPage');
         $this->addRoute("/search", SearchController::class, 'showSearchAnswer');
         $this->addRoute('/user/signup', UserController::class, 'signup');
+        $this->addRoute('/admin/all-products', AdminController::class, 'getAllProducts');
 
         $this->addAlias('/about', '/page/1');
         $this->addAlias('/contacts', '/page/2');
     }
 
-    public static function addRoute(
+    public function addRoute(
         string $url,
         string $controller,
         string $method

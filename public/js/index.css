@@ -1,0 +1,36 @@
+body {
+    font-family: "Verdana", serif;
+    font-size: 16px;
+    min-height: 100vh;
+    background-color: #ffffff;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+table th, table td {
+    border: 0.05em solid #cccccc;
+    padding: 0.5em;
+    text-align: center;
+}
+
+table th {
+    background-color: #F9FAFB;
+}
+
+table button {
+    cursor: pointer;
+}
+
+.btn{
+    border: 0.05em solid rgba(0, 0, 0, 0.1);
+    padding: 0.2em 0.3em;
+    border-radius: 0.1em;
+}
+
+.red-btn{
+    background: #c21c1c;
+}

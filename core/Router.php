@@ -27,6 +27,7 @@ class Router
         $this->addRoute('/catalog/product', ProductController::class, 'showProductPage');
         $this->addRoute("/search", SearchController::class, 'showSearchAnswer');
         $this->addRoute('/user/signup', UserController::class, 'signup');
+        $this->addRoute('/admin', AdminController::class, 'showAdminPage');
         $this->addRoute('/admin/all-products', AdminController::class, 'getAllProducts');
 
         $this->addAlias('/about', '/page/1');

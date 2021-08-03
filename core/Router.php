@@ -29,6 +29,7 @@ class Router
         $this->addRoute('/user/signup', UserController::class, 'signup');
         $this->addRoute('/admin', AdminController::class, 'showAdminPage');
         $this->addRoute('/admin/all-products', AdminController::class, 'getAllProducts');
+        $this->addRoute('/admin/delete-product', AdminController::class, 'deleteProduct');
 
         $this->addAlias('/about', '/page/1');
         $this->addAlias('/contacts', '/page/2');

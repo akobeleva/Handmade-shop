@@ -23,6 +23,13 @@ abstract class Model
         return static::rowToEntity($rows[0]);
     }
 
+    public static function deleteById($id): array
+    {
+        $queryBuilder = new QueryBuilder();
+        return $queryBuilder->delete()->from(static::$table)->where('id', $id)
+            ->execute();
+    }
+
     protected static function rowsToEntities($rows): array
     {
     }

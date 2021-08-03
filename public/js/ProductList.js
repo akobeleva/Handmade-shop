@@ -6,8 +6,9 @@ const ProductList = () => {
     const {products, deleteProduct} = useContext(AppContext);
 
     const deleteConfirm = (id) => {
-        if (window.confirm("Вы уверены, что хотите удалить данный продукт?")) Х
-        deleteProduct(id);
+        if (window.confirm("Вы уверены, что хотите удалить данный продукт?")) {
+            deleteProduct(id);
+        }
     }
 
     return (

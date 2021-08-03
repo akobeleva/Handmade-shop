@@ -17,34 +17,31 @@ export const Actions = () => {
     }, []);
 
     const deleteProduct = (productId) => {
-        let productDeleted = products.filter(product => product.id !== productId);
-        fetch("http://handmade/delete-product", {
-            method: "post",
+        let productDeleted = products.filter(product => {
+            return product.id !== productId;
+        });
+        fetch("http://handmade/admin/delete-product", {
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({id : productId}),
+            body: JSON.stringify({id: productId}),
         })
-            .then((response)=>{
+            .then((response) => {
                 return response.json();
             })
-            .then((data)=>{
-                if (data.success){
+            .then((data) => {
+                if (data.success) {
                     setProducts(productDeleted);
                 } else {
                     alert(data.msg);
                 }
             })
-            .catch((err)=>{
+            .catch((err) => {
                 console.log(err);
             });
-        return {
-            products,
-            deleteProduct,
-        };
-    }
-
+    };
     return (
-        {products}
+        {products, deleteProduct}
     )
 }

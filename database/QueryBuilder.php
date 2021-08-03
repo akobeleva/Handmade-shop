@@ -39,6 +39,12 @@ class QueryBuilder
         $this->setQueryType("update");
     }
 
+    public function delete(): QueryBuilder
+    {
+        $this->setQueryType("delete");
+        return $this;
+    }
+
     public function select($columns = "*"): QueryBuilder
     {
         $this->setQueryType("select");
@@ -159,6 +165,16 @@ class QueryBuilder
                 }
                 if ($this->limit !== null) {
                     $queryString = $queryString . " LIMIT " . $this->limit;
+                }
+                break;
+            case "delete":
+                $queryString = "DELETE ";
+                $queryString = $queryString . " FROM " . $this->table;
+                if (count($this->whereConditions) > 0) {
+                    $queryString = $queryString . " WHERE ";
+                    foreach ($this->whereConditions as $condition) {
+                        $queryString = $queryString . $condition['condition'];
+                    }
                 }
         }
         return $queryString;

@@ -60,12 +60,9 @@ class AdminController extends Controller
             $productId = $data->id;
             $deleteProduct = ProductModel::deleteById($productId);
             if (isset($deleteProduct)) {
-                $test = json_encode(["success" => 1, "msg" => "Product deleted"]
-                );
-                echo $test;
+                echo json_encode(["success" => 1, "msg" => "Product deleted"]);
             } else {
-                echo json_encode(["success" => 0, "msg" => "Product not found"]
-                );
+                echo json_encode(["success" => 0, "msg" => "Product not found"]);
             }
         } else {
             echo json_encode(["success" => 0, "msg" => "Product not found"]);

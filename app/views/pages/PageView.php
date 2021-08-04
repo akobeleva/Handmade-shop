@@ -24,4 +24,10 @@ class PageView extends View
         $vars['text'] = $this->renderTemplate('404.html', $vars);
         $this->renderPageContent($vars);
     }
+
+    public function renderMessages($vars = []){
+        $text = $this->renderTemplate('messages_tpl.php', $vars);
+        $vars['text'] = $text;
+        $this->renderPageContent($vars);
+    }
 }

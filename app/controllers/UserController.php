@@ -18,7 +18,7 @@ class UserController extends Controller
         $this->view->renderSignupPage();
     }
 
-    public function signup($_post)
+    public function signup( $_post)
     {
         $messages = array();
         if (isset($_post['login'])) {
@@ -63,21 +63,21 @@ class UserController extends Controller
                 $messages[] = "Недопустимая длина имени пользователя";
             }
         }
-
+        $vars = [];
+        $vars['login'] = $_post['login'];
+        $vars['password'] = $_post['password'];
+        $vars['email'] = $_post['email'];
+        $vars['name'] = $_post['username'];
         if (empty($messages)){
-            $login = $_post['login'];
-            $password = $_post['password'];
-            $email = $_post['email'];
-            $name = $_post['username'];
-            $newUser = new UserModel($login, $password, $email, $name);
+            $newUser = new UserModel($_post['login'], password_hash($_post['password'], PASSWORD_DEFAULT), $_post['email'], $_post['username']);
             $newUser->save();
             $messages[] = "Вы успешно зарегистрированы :)";
-            $vars['msg_success'] = $messages;
+            $vars['message_success'] = $messages;
         }
         else {
-            $vars['msg_error'] = $messages;
+            $vars['message_error'] = $messages;
         }
-        $this->view->renderMessages($vars);
+        $this->view->renderSignupPage($vars);
     }
 
     public function login()

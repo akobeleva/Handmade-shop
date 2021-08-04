@@ -24,11 +24,10 @@ class UserModel extends Model
         $id = null,
         $role = null
     ) {
-        $this->id = $name;
-        $this->login = $name;
-        $this->password = $login;
-        $this->email = $password;
-        $this->name = $email;
+        $this->login = $login;
+        $this->password = $password;
+        $this->email = $email;
+        $this->name = $name;
         $this->id = $id;
         $this->role = $role;
     }

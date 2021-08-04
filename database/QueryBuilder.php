@@ -11,6 +11,7 @@ class QueryBuilder
     private $whereConditions = [];
     private $groupByColumns = [];
     private $orderByColumns = [];
+    private $values = [];
     private $limit;
     private static $db;
 
@@ -39,6 +40,17 @@ class QueryBuilder
         $this->setQueryType("update");
     }
 
+    public function insert($columns): QueryBuilder
+    {
+        $this->setQueryType("insert");
+        $arrayColumns = explode(",", $columns);
+        $this->columns = array_merge(
+            $this->columns,
+            $arrayColumns
+        );
+        return $this;
+    }
+
     public function delete(): QueryBuilder
     {
         $this->setQueryType("delete");
@@ -65,6 +77,9 @@ class QueryBuilder
         } elseif ($operator == "IN") {
             $condition = $whereOperator . ' ' . $column . ' ' . $operator
                 . ' (' . $value . ')';
+        } elseif (is_string($value)) {
+            $condition = $whereOperator . ' ' . $column . $operator . "'"
+                . $value . "'";
         } else {
             $condition = $whereOperator . ' ' . $column . $operator . $value;
         }
@@ -92,6 +107,12 @@ class QueryBuilder
     }
 
     public function from($table): QueryBuilder
+    {
+        $this->table = $table;
+        return $this;
+    }
+
+    public function into($table): QueryBuilder
     {
         $this->table = $table;
         return $this;
@@ -129,10 +150,32 @@ class QueryBuilder
         return $this;
     }
 
+    public function values(... $values): QueryBuilder
+    {
+        $this->values = $values;
+        return $this;
+    }
+
     public function getQueryString(): string
     {
         $queryString = '';
         switch ($this->queryType) {
+            case "insert":
+                $queryString = "INSERT INTO " . $this->table;
+                if (!empty($this->columns)){
+                    $queryString = $queryString ."(";
+                    $queryString = $queryString . implode(",", $this->columns);
+                    $queryString = $queryString .") ";
+                }
+                if (!empty($this->values)){
+                    $queryString = $queryString ."VALUES (";
+                    foreach ($this->values as &$value) {
+                        if (is_string($value)) $value = "'". $value . "'";
+                    }
+                    $queryString = $queryString . implode(",", $this->values);
+                    $queryString = $queryString .")";
+                }
+                break;
             case "select":
                 $queryString = "SELECT ";
                 foreach ($this->columns as $column) {

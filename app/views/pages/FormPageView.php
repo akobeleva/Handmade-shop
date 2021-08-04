@@ -2,7 +2,7 @@
 
 namespace app\views\pages;
 
-class SignupPageView extends PageView
+class FormPageView extends PageView
 {
     public function renderSignupPage(){
         $vars['title'] = 'Регистрация';

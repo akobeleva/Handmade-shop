@@ -25,7 +25,8 @@ class Router
         $this->addRoute('/catalog/category', CategoryController::class, 'showCategoryPage');
         $this->addRoute('/catalog/subcategory', SubcategoryController::class, 'showSubcategoryPage');
         $this->addRoute('/catalog/product', ProductController::class, 'showProductPage');
-        $this->addRoute("/search", SearchController::class, 'showSearchAnswer');
+        $this->addRoute('/search', SearchController::class, 'showSearchAnswer');
+        $this->addRoute('/signup', UserController::class, 'showSignupPage');
         $this->addRoute('/user/signup', UserController::class, 'signup');
         $this->addRoute('/admin', AdminController::class, 'showAdminPage');
         $this->addRoute('/admin/all-products', AdminController::class, 'getAllProducts');
@@ -58,10 +59,10 @@ class Router
     public static function dispatch()
     {
         $param = '';
-        if ($_GET) {
+        if ($_GET || $_POST) {
             $url = rtrim($_SERVER['REQUEST_URI'], $_SERVER['QUERY_STRING']);
             $url = rtrim($url, '/?');
-            $param = $_GET;
+            $param = $_GET ?: $_POST;
         } else {
             $url = rtrim($_SERVER['REQUEST_URI'], '/');
         }

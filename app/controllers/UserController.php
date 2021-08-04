@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\middleware\Validator;
 use app\models\UserModel;
 use app\views\pages\FormPageView;
 use core\Controller;
@@ -18,63 +19,40 @@ class UserController extends Controller
         $this->view->renderSignupPage();
     }
 
-    public function signup( $_post)
+    public function signup($data)
     {
-        $messages = array();
-        if (isset($_post['login'])) {
-            if (trim($_post['login']) == "") {
-                $messages[] = "Введите логин";
-            }
-            if (mb_strlen($_post['login']) < 5 || mb_strlen($_post['login']) > 90) {
-                $messages[] = "Недопустимая длина логина";
-            }
-            if (UserModel::checkUserByLogin($_post['login'])) {
-                $messages[] = "Пользователь с таким логином существует!";
-            }
+        $validator = new Validator();
+        $messages = $validator->validateRegisterData($data);
+        if (isset($data['login']) && UserModel::checkUserByLogin($data['login'])) {
+            $messages[] = "Пользователь с таким логином существует!";
         }
-        if (isset($_post['password'])) {
-            if (trim($_post['password']) == "") {
-                $messages[] = "Введите пароль";
-            }
-            if (mb_strlen($_post['password']) < 6 || mb_strlen(($_post['password']) > 20)) {
-                $messages[] = "Недопустимая длина пароля";
-            }
-        }
-        if (isset($_post['email'])) {
-            if (trim($_post['email']) == "") {
-                $messages[] = "Введите E-mail";
-            }
-            if (!preg_match(
-                "/[0-9a-z_]+@[0-9a-z_^]+\.[a-z]{2,3}/i",
-                $_post['email']
-            )
-            ) {
-                $messages[] = 'Неверно введен E-mail';
-            }
-            if (UserModel::checkUserByEmail($_post['email'])) {
-                $messages[] = "Пользователь с таким E-mail существует!";
-            }
-        }
-        if (isset($_post['username'])) {
-            if (trim($_post['username']) == "") {
-                $messages[] = "Введите имя пользователя";
-            }
-            if (mb_strlen($_post['username']) < 4 || mb_strlen(($_post['username']) > 30)) {
-                $messages[] = "Недопустимая длина имени пользователя";
-            }
+        if (isset($data['login']) && UserModel::checkUserByEmail($data['email'])) {
+            $messages[] = "Пользователь с таким E-mail существует!";
         }
         $vars = [];
-        $vars['login'] = $_post['login'];
-        $vars['password'] = $_post['password'];
-        $vars['email'] = $_post['email'];
-        $vars['name'] = $_post['username'];
-        if (empty($messages)){
-            $newUser = new UserModel($_post['login'], password_hash($_post['password'], PASSWORD_DEFAULT), $_post['email'], $_post['username']);
+        if (isset($data['login'])) {
+            $vars['login'] = $data['login'];
+        }
+        if (isset($data['password'])) {
+            $vars['password'] = $data['password'];
+        }
+        if (isset($data['email'])) {
+            $vars['email'] = $data['email'];
+        }
+        if (isset($data['username'])) {
+            $vars['name'] = $data['username'];
+        }
+        if (empty($messages)) {
+            $newUser = new UserModel(
+                $data['login'],
+                password_hash($data['password'], PASSWORD_DEFAULT),
+                $data['email'],
+                $data['username']
+            );
             $newUser->save();
             $messages[] = "Вы успешно зарегистрированы :)";
             $vars['message_success'] = $messages;
-        }
-        else {
+        } else {
             $vars['message_error'] = $messages;
         }
         $this->view->renderSignupPage($vars);

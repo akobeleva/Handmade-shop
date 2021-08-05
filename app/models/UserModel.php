@@ -32,11 +32,41 @@ class UserModel extends Model
         $this->role = $role;
     }
 
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getLogin()
+    {
+        return $this->login;
+    }
+
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function getRole()
+    {
+        return $this->role;
+    }
+
     public function save()
     {
         $queryBuilder = new QueryBuilder();
         $queryBuilder->insert('login,password,email,name')->into(self::$table)
-            ->values($this->login, $this->password,$this->email, $this->name)
+            ->values($this->login, $this->password, $this->email, $this->name)
             ->execute();
     }
 
@@ -54,5 +84,25 @@ class UserModel extends Model
         $rows = $queryBuilder->select()->from(static::$table)
             ->where('email', $email)->execute();
         return $rows != [];
+    }
+
+    public static function getUserByLogin($login): Model
+    {
+        $queryBuilder = new QueryBuilder();
+        $rows = $queryBuilder->select()->from(static::$table)
+            ->where('login', $login)->execute();
+        return self::rowToEntity($rows[0]);
+    }
+
+    protected static function rowToEntity($row): Model
+    {
+        return new UserModel(
+            $row['login'],
+            $row['password'],
+            $row['email'],
+            $row['name'],
+            $row['id'],
+            $row['role']
+        );
     }
 }

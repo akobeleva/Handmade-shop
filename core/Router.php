@@ -28,6 +28,9 @@ class Router
         $this->addRoute('/search', SearchController::class, 'showSearchAnswer');
         $this->addRoute('/signup', UserController::class, 'showSignupPage');
         $this->addRoute('/user/signup', UserController::class, 'signup');
+        $this->addRoute('/login', UserController::class, 'showLoginPage');
+        $this->addRoute('/user/login', UserController::class, 'login');
+        $this->addRoute('/logout', UserController::class, 'logout');
         $this->addRoute('/admin', AdminController::class, 'showAdminPage');
         $this->addRoute('/admin/all-products', AdminController::class, 'getAllProducts');
         $this->addRoute('/admin/delete-product', AdminController::class, 'deleteProduct');

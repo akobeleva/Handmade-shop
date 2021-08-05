@@ -33,7 +33,12 @@ use app\controllers\MenuController;
         <div class="buttons">
             <a href="/"><img src="/img/shopping-bag.png" alt=""></a>
             <a href="/"><img src="/img/avatar.png" alt=""></a>
-            <a href="/signup">SignUp</a>
+            <?php if (isset($_SESSION['logged_user'])):?>
+                <a href="/logout">Выход</a>
+            <?php else:?>
+                <a href="/login">Вход</a>
+                <a href="/signup">Регистрация</a>
+            <?php endif;?>
         </div>
     </div>
     <nav class="menu">

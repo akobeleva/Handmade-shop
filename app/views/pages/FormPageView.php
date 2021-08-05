@@ -12,10 +12,10 @@ class FormPageView extends PageView
         $this->renderPageContent($vars);
     }
 
-    public function renderLoginPage()
+    public function renderLoginPage($vars = [])
     {
         $vars['title'] = 'Авторизация';
-        $text = $this->renderTemplate('login_tpl.php');
+        $text = $this->renderTemplate('login_tpl.php', $vars);
         $vars['text'] = $text;
         $this->renderPageContent($vars);
     }

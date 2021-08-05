@@ -19,6 +19,11 @@ class UserController extends Controller
         $this->view->renderSignupPage();
     }
 
+    public function showLoginPage()
+    {
+        $this->view->renderLoginPage();
+    }
+
     public function signup($data)
     {
         $validator = new Validator();
@@ -58,11 +63,38 @@ class UserController extends Controller
         $this->view->renderSignupPage($vars);
     }
 
-    public function login()
+    public function login($data)
     {
+        $messages = [];
+        if (isset($data['login']) && UserModel::checkUserByLogin($data['login']))
+        {
+            $user = UserModel::getUserByLogin($data['login']);
+            if ($user) {
+                if (password_verify($data['password'], $user->getPassword())) {
+                    $_SESSION['logged_user'] = $user->getId();
+                    header('Location: /');
+                } else {
+                    $messages[] = "Пароль введен неверно";
+                }
+            }
+        } else {
+            $messages[] = "Пользователь с таким логином не найден";
+        }
+        if (isset($data['login'])) {
+            $vars['login'] = $data['login'];
+        }
+        if (isset($data['password'])) {
+            $vars['password'] = $data['password'];
+        }
+        $vars['message_error'] = $messages;
+        $this->view->renderLoginPage($vars);
     }
 
     public function logout()
     {
+        if (isset($_SESSION['logged_user'])) {
+            unset($_SESSION['logged_user']);
+            header('Location: /');
+        }
     }
 }

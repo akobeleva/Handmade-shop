@@ -72,7 +72,11 @@ class UserController extends Controller
             if ($user) {
                 if (password_verify($data['password'], $user->getPassword())) {
                     $_SESSION['logged_user'] = $user->getId();
-                    header('Location: /');
+                    if ($user->getRole() == 'admin') {
+                        header('Location: /admin');
+                    } else {
+                        header('Location: /');
+                    }
                 } else {
                     $messages[] = "Пароль введен неверно";
                 }

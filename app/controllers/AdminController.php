@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\ProductModel;
+use app\models\UserModel;
 use app\views\AdminView;
 use core\Controller;
 
@@ -15,7 +16,13 @@ class AdminController extends Controller
 
     public function showAdminPage()
     {
-        $this->view->renderAdminView();
+        if (isset($_SESSION['logged_user'])
+            && (UserModel::getById($_SESSION['logged_user'])->getRole() == 'admin')
+        ) {
+            $this->view->renderAdminView();
+        } else {
+            $this->view->renderNotFoundPage();
+        }
     }
 
     public function getAllProducts()

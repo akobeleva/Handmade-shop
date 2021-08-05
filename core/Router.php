@@ -9,6 +9,7 @@ use app\controllers\ProductController;
 use app\controllers\SearchController;
 use app\controllers\StaticPageController;
 use app\controllers\SubcategoryController;
+use app\controllers\AuthorizationController;
 use app\controllers\UserController;
 
 
@@ -34,6 +35,10 @@ class Router
         $this->addRoute('/admin', AdminController::class, 'showAdminPage');
         $this->addRoute('/admin/all-products', AdminController::class, 'getAllProducts');
         $this->addRoute('/admin/delete-product', AdminController::class, 'deleteProduct');
+        $this->addRoute('/user/profile', UserController::class, 'showUserProfilePage');
+        $this->addRoute('/user/orders', UserController::class, 'showUserOrdersPage');
+        $this->addRoute('/user/products', UserController::class, 'showUserProductsPage');
+        $this->addRoute('/user/favorites', UserController::class, 'showUserFavoritesPage');
 
         $this->addAlias('/about', '/page/1');
         $this->addAlias('/contacts', '/page/2');

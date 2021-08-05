@@ -96,6 +96,16 @@ class ProductModel extends Model
         return self::rowsToEntities($rows);
     }
 
+    public static function getProductsBySellerId($sellerId): array
+    {
+        $queryBuilder = new QueryBuilder();
+        $rows = $queryBuilder->select()->from(self::$table)->where(
+            'seller_id',
+            $sellerId
+        )->execute();
+        return self::rowsToEntities($rows);
+    }
+
     protected static function rowsToEntities($rows): array
     {
         $entities = [];

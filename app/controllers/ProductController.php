@@ -39,4 +39,9 @@ class ProductController extends Controller
     {
         return ProductModel::getById($productId);
     }
+
+    public function getProductsBySellerId($sellerId): array
+    {
+        return ProductModel::getProductsBySellerId($sellerId);
+    }
 }

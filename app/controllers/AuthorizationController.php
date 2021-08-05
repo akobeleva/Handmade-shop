@@ -75,7 +75,7 @@ class AuthorizationController extends Controller
                     if ($user->getRole() == 'admin') {
                         header('Location: /admin');
                     } else {
-                        header('Location: /');
+                        header('Location: /user/profile');
                     }
                 } else {
                     $messages[] = "Пароль введен неверно";

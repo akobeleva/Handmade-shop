@@ -31,11 +31,13 @@ use app\controllers\MenuController;
                 <i class="fa fa-search"></i></button>
         </form>
         <div class="buttons">
-            <a href="/"><img src="/img/shopping-bag.png" alt=""></a>
-            <a href="/"><img src="/img/avatar.png" alt=""></a>
             <?php if (isset($_SESSION['logged_user'])):?>
+                <a href="/user/shopping-bag"><img src="/img/shopping-bag.png" alt=""></a>
+                <a href="/user/profile"><img src="/img/avatar.png" alt=""></a>
                 <a href="/logout">Выход</a>
             <?php else:?>
+                <a href="/login"><img src="/img/shopping-bag.png" alt=""></a>
+                <a href="/login"><img src="/img/avatar.png" alt=""></a>
                 <a href="/login">Вход</a>
                 <a href="/signup">Регистрация</a>
             <?php endif;?>

@@ -11,7 +11,8 @@ if (isset($title)) : ?>
                     <?php
                     foreach ($leftMenuItems as $item):
                         if (isset($item['link'])):?>
-                            <a href = "<?php echo $item['link'];?>" class="list-group-item"><?php if (isset($item['entity'])) echo $item['entity']->getName() ?></a>
+                            <a href = "<?php echo $item['link'];?>" class="list-group-item"><?php if (isset($item['entity'])) echo $item['entity']->getName();
+                                elseif (isset($item['name'])) echo $item['name'];?></a>
                     <?php endif;
                     endforeach; ?>
                 </div>

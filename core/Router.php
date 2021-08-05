@@ -26,11 +26,11 @@ class Router
         $this->addRoute('/catalog/subcategory', SubcategoryController::class, 'showSubcategoryPage');
         $this->addRoute('/catalog/product', ProductController::class, 'showProductPage');
         $this->addRoute('/search', SearchController::class, 'showSearchAnswer');
-        $this->addRoute('/signup', UserController::class, 'showSignupPage');
-        $this->addRoute('/user/signup', UserController::class, 'signup');
-        $this->addRoute('/login', UserController::class, 'showLoginPage');
-        $this->addRoute('/user/login', UserController::class, 'login');
-        $this->addRoute('/logout', UserController::class, 'logout');
+        $this->addRoute('/signup', AuthorizationController::class, 'showSignupPage');
+        $this->addRoute('/user/signup', AuthorizationController::class, 'signup');
+        $this->addRoute('/login', AuthorizationController::class, 'showLoginPage');
+        $this->addRoute('/user/login', AuthorizationController::class, 'login');
+        $this->addRoute('/logout', AuthorizationController::class, 'logout');
         $this->addRoute('/admin', AdminController::class, 'showAdminPage');
         $this->addRoute('/admin/all-products', AdminController::class, 'getAllProducts');
         $this->addRoute('/admin/delete-product', AdminController::class, 'deleteProduct');

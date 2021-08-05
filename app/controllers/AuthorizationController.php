@@ -7,7 +7,7 @@ use app\models\UserModel;
 use app\views\pages\FormPageView;
 use core\Controller;
 
-class UserController extends Controller
+class AuthorizationController extends Controller
 {
     public function __construct()
     {

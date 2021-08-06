@@ -74,7 +74,7 @@ class UserController extends Controller
             array('name' => 'Профиль', 'link' => '/user/profile'),
             array('name' => 'Мои заказы', 'link' => '/user/orders'),
             array('name' => 'Мои товары', 'link' => '/user/products'),
-            array('name' => 'Избраное', 'link' => '/user/favorites')
+            array('name' => 'Избранное', 'link' => '/user/favorites')
         );
     }
 }

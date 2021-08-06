@@ -8,6 +8,8 @@ class UserAccountPageView extends SidebarPageView
 {
     public function renderUserProfilePage($vars = [])
     {
+        $rightContent = $this->renderTemplate('profile_tpl.php', $vars);
+        $vars['rightContent'] = $rightContent;
         $this->renderPageContent($vars);
     }
 

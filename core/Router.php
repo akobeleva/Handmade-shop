@@ -39,6 +39,7 @@ class Router
         $this->addRoute('/user/orders', UserController::class, 'showUserOrdersPage');
         $this->addRoute('/user/products', UserController::class, 'showUserProductsPage');
         $this->addRoute('/user/favorites', UserController::class, 'showUserFavoritesPage');
+        $this->addRoute('/user/profile-settings', UserController::class, 'saveProfileSettings');
 
         $this->addAlias('/about', '/page/1');
         $this->addAlias('/contacts', '/page/2');

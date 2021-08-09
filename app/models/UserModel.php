@@ -62,12 +62,34 @@ class UserModel extends Model
         return $this->role;
     }
 
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    public function setLogin($login)
+    {
+        $this->login = $login;
+    }
+
     public function save()
     {
         $queryBuilder = new QueryBuilder();
         $queryBuilder->insert('login,password,email,name')->into(self::$table)
             ->values($this->login, $this->password, $this->email, $this->name)
             ->execute();
+    }
+
+    public function update(){
+        $queryBuilder = new QueryBuilder();
+        $queryBuilder->update()->table(self::$table)->set('login', $this->login)
+            ->set('email', $this->email)->set('name', $this->name)
+            ->where('id', $this->id)->execute();
     }
 
     public static function checkUserByLogin($login): bool

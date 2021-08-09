@@ -38,16 +38,6 @@ if (isset($message_success)): ?>
         </div>
 
         <div class="control-group">
-            <!-- Phone -->
-            <label class="control-label" for="phone">Телефон</label>
-            <div class="controls">
-                <input type="text" class="input-medium bfh-phone input-xlarge" data-format="+7 (ddd) ddd-dd-dd" id="phone" name="phone" placeholder=""
-                       value="<?php if (isset($phone)) echo $phone?>">
-                <p class="help-block">Введите свой телефон</p>
-            </div>
-        </div>
-
-        <div class="control-group">
             <!-- Button -->
             <div class="controls">
                 <button class="btn btn-success">Сохранить изменения</button>

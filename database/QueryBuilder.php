@@ -13,6 +13,7 @@ class QueryBuilder
     private $orderByColumns = [];
     private $values = [];
     private $limit;
+    private $setColumns =[];
     private static $db;
 
     public function __construct()
@@ -35,9 +36,10 @@ class QueryBuilder
         ];
     }
 
-    public function update()
+    public function update(): QueryBuilder
     {
         $this->setQueryType("update");
+        return $this;
     }
 
     public function insert($columns): QueryBuilder
@@ -118,6 +120,12 @@ class QueryBuilder
         return $this;
     }
 
+    public function table($table): QueryBuilder
+    {
+        $this->table = $table;
+        return $this;
+    }
+
     public function join($table): QueryBuilder
     {
         $this->setJoinTable('INNER JOIN', $table);
@@ -153,6 +161,12 @@ class QueryBuilder
     public function values(... $values): QueryBuilder
     {
         $this->values = $values;
+        return $this;
+    }
+
+    public function set($column, $value): QueryBuilder
+    {
+        $this->setColumns[] = $column . "='" . $value . "'";
         return $this;
     }
 
@@ -213,6 +227,16 @@ class QueryBuilder
             case "delete":
                 $queryString = "DELETE ";
                 $queryString = $queryString . " FROM " . $this->table;
+                if (count($this->whereConditions) > 0) {
+                    $queryString = $queryString . " WHERE ";
+                    foreach ($this->whereConditions as $condition) {
+                        $queryString = $queryString . $condition['condition'];
+                    }
+                }
+                break;
+            case "update":
+                $queryString = "UPDATE " . $this->table . " ";
+                $queryString = $queryString . "SET " . implode(", ", $this->setColumns);
                 if (count($this->whereConditions) > 0) {
                     $queryString = $queryString . " WHERE ";
                     foreach ($this->whereConditions as $condition) {
